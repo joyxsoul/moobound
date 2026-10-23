@@ -64,6 +64,7 @@ h3{font-size:12px;letter-spacing:.14em;color:var(--mu);margin:22px 0 4px;font-we
 .bond .ar img{width:100%;height:100%;object-fit:cover}
 .bond .in{flex:1;min-width:0}
 .bond .hd{display:flex;justify-content:space-between;align-items:baseline}
+.tdl{margin-top:6px;display:grid;gap:3px}.tdl span{font-size:13px;color:var(--mu);line-height:1.3}
 .bond .hd b{font-size:17px}.bond .hd i{font-size:18px;color:var(--cy)}
 .bond p{margin:2px 0 6px;color:var(--mu);font-size:14px}
 .bar{display:flex;gap:3px}.bar s{flex:1;height:6px;border-radius:3px;background:#1d2a5c;text-decoration:none}.bar s.f{background:var(--cy)}
@@ -169,6 +170,8 @@ acts:[],
 hist:[],
 jr:[{id:1,t:'Email supervisor about draft',d:false},{id:2,t:'Buy groceries',d:false},{id:3,t:'Book dentist',d:true}]}}
 function norm(s){s.pts=s.pts||{Courage:4,Charm:6,Knowledge:8};STATS.forEach(function(k){if(typeof s.pts[k]!=='number')s.pts[k]=0});s.ops=s.ops||[{id:1,name:'Thesis draft due',due:ymd(4)}];if(!s.mp){s.mp={};s.mp[ym()]={Courage:s.pts.Courage||0,Charm:s.pts.Charm||0,Knowledge:s.pts.Knowledge||0}}s.tasks=(s.tasks||[]).filter(function(t){return t.slot!=='dark'});if(!s.lib){var nw=Date.now(),DY=864e5,lb={};s.tasks.forEach(function(t){lb[t.t.toLowerCase()]={t:t.t,stat:t.stat,slot:t.slot,last:t.done?nw:nw-14*DY}});[['Pixel game session','Knowledge','eve',9],['Call a friend','Charm','eve',16],['Cold shower','Courage','early',24]].forEach(function(x){var k=x[0].toLowerCase();if(!lb[k])lb[k]={t:x[0],stat:x[1],slot:x[2],last:nw-x[3]*DY}});s.lib=Object.keys(lb).map(function(k){return lb[k]})}s.bonds=s.bonds||[];s.bonds.forEach(function(b){b.arch=!!b.arch;b.notes=b.notes||'';b.list=b.list||[]});s.acts=s.acts||[];s.acts.forEach(function(a){a.arch=!!a.arch});s.plan=s.plan||[];if(!s.rolled)s.rolled=ymd(0);s.hist=s.hist||[];s.jr=s.jr||[];s.jtrash=s.jtrash||[];
+if(!s.empressGone){s.bonds=s.bonds.filter(function(b){return b.name!=='The Empress'});s.empressGone=true}
+if(!s.rankless){s.bonds.forEach(function(b){if(b.note==='Ran today · next rank in 2 sessions')b.note='Ran today';if(b.note==='Needs Knowledge: Sharp to rank up')b.note=''});s.rankless=true}
 if(!s.cleaned){var rm=['thesis','reading','working out'];s.acts=s.acts.filter(function(a){return rm.indexOf(a.name.toLowerCase())<0});s.hist=s.hist.filter(function(h){return rm.indexOf(h.name.toLowerCase())<0});s.cleaned=true}
 if(!s.logImported){LOGIMP.n.forEach(function(n,i){if(!s.acts.some(function(a){return a.name===n}))s.acts.push({id:5000+i,name:n,desc:'',acc:0,since:null,arch:false})});LOGIMP.s.forEach(function(x){s.hist.push({name:LOGIMP.n[x[0]],at:x[1],ms:x[2]})});s.hist.sort(function(a,b){return b.at-a.at});s.logImported=true}
 return s}
@@ -212,11 +215,12 @@ h+='</div></div>'});
 var mo=S.mp[ym()]||{};h+='<div class="stats">'+STATS.map(function(k){return'<div>'+k+'<b class="disp">Growing</b><small>'+(mo[k]||0)+' pts</small></div>'}).join('')+'</div>';
 $('today').innerHTML=h}
 
-function card(b){var bar='';for(var i=0;i<10;i++)bar+='<s'+(i<b.rank?' class="f"':'')+'></s>';
-return'<div class="bond'+(b.rev?' rev':'')+(b.arch?' arch':'')+'" data-a="bond" data-id="'+b.id+'"><div class="ar disp">'+(b.photo?'<img alt="" src="'+b.photo+'">':esc(b.num))+'</div><div class="in"><div class="hd"><b>'+esc(b.name)+'</b><i class="disp">Rank '+b.rank+'</i></div><p>'+esc(b.cat)+'</p><div class="bar">'+bar+'</div><small>'+esc(b.note)+'</small></div></div>'}
+function tdl(b){var o=b.list.filter(function(c){return!c.d});return o.length?'<div class="tdl">'+o.map(function(c){return'<span>'+esc(c.t)+(c.due?' · '+fd(c.due):'')+'</span>'}).join('')+'</div>':''}
+function card(b){
+return'<div class="bond'+(b.rev?' rev':'')+(b.arch?' arch':'')+'" data-a="bond" data-id="'+b.id+'"><div class="ar disp">'+(b.photo?'<img alt="" src="'+b.photo+'">':esc(b.num))+'</div><div class="in"><div class="hd"><b>'+esc(b.name)+'</b></div>'+tdl(b)+'</div></div>'}
 function rBonds(){
 var act=S.bonds.filter(function(b){return!b.arch}),ar=S.bonds.filter(function(b){return b.arch});
-var h='<div class="hrow"><div><div class="disp title">Bonds</div><div class="sub">Pursuits you’re growing with</div></div><button class="pill" data-a="bcomp">New Bond</button></div><div class="rank"><div><small>RANK UP</small><b>The Chariot reached Rank 6</b></div><i class="disp">VII</i></div>';
+var h='<div class="hrow"><div><div class="disp title">Bonds</div><div class="sub">Pursuits you’re growing with</div></div><button class="pill" data-a="bcomp">New Bond</button></div>';
 h+=act.map(card).join('');
 if(ar.length){h+='<button class="link" data-a="tarch">'+(showArch?'Hide':'Show')+' archived ('+ar.length+')</button>'+(showArch?ar.map(card).join(''):'')}
 $('bonds').innerHTML=h}
@@ -273,12 +277,12 @@ function expSheet(){sheet('Export data','<p class="lab" style="margin-top:0">Cop
 function impSheet(){sheet('Import data','<p class="lab" style="margin-top:0">Paste a backup code. This replaces everything on this device.</p><textarea id="imp" rows="6" style="font-size:12px"></textarea><div id="err" class="none" style="color:#ff9a8a"></div>','Import',function(){var raw=V('imp');try{var j;try{j=JSON.parse(raw)}catch(e){j=JSON.parse(decodeURIComponent(escape(atob(raw))))}var d=j.data||j;if(!d.tasks||!d.bonds)throw 0;S=norm(d);fixNid();shuffleSug()}catch(e){$('err').textContent='That doesn’t look like a Moonbound backup.';return false}})}
 
 function rDetail(){var b=by(S.bonds,detail);if(!b){closeSheet();return}
-var h='<div class="panel"><div class="dhead"><label class="dph" for="dfile">'+(b.photo?'<img alt="" src="'+b.photo+'">':'<b class="disp">'+esc(b.num)+'</b>')+'<span>'+(b.photo?'Change photo':'Add photo')+'</span></label><input id="dfile" type="file" accept="image/*" hidden><div><b>'+esc(b.name)+'</b><p>'+esc(b.cat)+'</p><i class="disp">Rank '+b.rank+'</i></div></div>';
-h+='<label for="dnotes">Notes</label><textarea id="dnotes" placeholder="Anything worth remembering">'+esc(b.notes)+'</textarea><span class="lab">To do together</span>';
+var h='<div class="panel"><div class="dhead"><label class="dph" for="dfile">'+(b.photo?'<img alt="" src="'+b.photo+'">':'<b class="disp">'+esc(b.num)+'</b>')+'<span>'+(b.photo?'Change photo':'Add photo')+'</span></label><input id="dfile" type="file" accept="image/*" hidden><div><b>'+esc(b.name)+'</b><p>'+esc(b.cat)+'</p></div></div>';
+h+='<label for="dlab">Label</label><input id="dlab" maxlength="50" value="'+esc(b.cat)+'" placeholder="Fitness, Friends · Maya"><label for="dnotes">Notes</label><textarea id="dnotes" placeholder="Anything worth remembering">'+esc(b.notes)+'</textarea><span class="lab">To do together</span>';
 h+=b.list.length?b.list.map(function(c,i){var late=c.due&&!c.d&&dd(c.due)<0;return'<div class="jrow"><button class="ck'+(c.d?' d':'')+'" data-a="dchk" data-i="'+i+'"><i>'+(c.d?'✓':'')+'</i><span>'+esc(c.t)+(c.due?'<small class="'+(late?'late':'')+'">'+(late?'Overdue · ':'Due ')+fd(c.due)+'</small>':'')+'</span></button><button class="x" data-a="ddel" data-i="'+i+'" aria-label="Delete">×</button></div>'}).join(''):'<div class="none">Nothing yet</div>';
 h+='<div class="dadd"><input id="dti" maxlength="80" placeholder="Add a to-do"><button class="sm" data-a="dadd" style="padding:10px 14px">Add</button><input id="dtd" type="date" aria-label="Due date"></div>';
 h+='<button class="opt" data-a="darch">'+(b.arch?'Unarchive bond':'Archive bond')+'</button><div class="btns"><button class="btn p" data-a="cancel">Done</button></div></div>';
-var s=$('sheet'),ns=document.activeElement&&document.activeElement.id==='dnotes';if(!ns){s.innerHTML=h;s.classList.add('on');s._ok=null}}
+var s=$('sheet'),ns=document.activeElement&&(document.activeElement.id==='dnotes'||document.activeElement.id==='dlab');if(!ns){s.innerHTML=h;s.classList.add('on');s._ok=null}}
 
 function rPlanner(){var h='<div class="panel"><h4>Planner</h4>',order=PLAN.map(function(x){return x.k});
 if(!plForm){h+='<div class="chips2">'+DAYS14.map(function(i){var c=S.plan.filter(function(p){return p.date===ymd(i)}).length;return'<button class="chip'+(i===plDay?' on':'')+'" data-a="pday" data-i="'+i+'">'+dl(i)+(c?'<em>'+c+'</em>':'')+'</button>'}).join('')+'</div>';
@@ -291,7 +295,7 @@ h+='<span class="lab" style="margin-top:0">'+(p?'Edit task':'Plan a task')+'</sp
 var s=$('sheet');s.innerHTML=h;s.classList.add('on');s._ok=null}
 function by(arr,id){return arr.filter(function(x){return x.id==id})[0]}
 document.addEventListener('change',function(e){if(e.target.id==='f0'){var v=e.target.value;$('f1').style.display=v==='__new'?'block':'none';if(v==='__new')$('f1').focus();else fillFrom(+v);return}var f=e.target.files&&e.target.files[0];if(!f)return;if(e.target.id==='f3')pick(f,function(u){tmpPhoto=u});if(e.target.id==='dfile')pick(f,function(u){var b=by(S.bonds,detail);if(b){b.photo=u;render()}})});
-document.addEventListener('input',function(e){if(e.target.id==='dnotes'){var b=by(S.bonds,detail);if(b){b.notes=e.target.value;save()}}});
+document.addEventListener('input',function(e){if(e.target.id==='dnotes'){var b=by(S.bonds,detail);if(b){b.notes=e.target.value;save()}}if(e.target.id==='dlab'){var b2=by(S.bonds,detail);if(b2){b2.cat=e.target.value;save()}}});
 document.addEventListener('click',function(e){
 var s=$('sheet');if(e.target===s){closeSheet();render();return}
 var t=e.target.closest('[data-a]');if(!t)return;var a=t.dataset.a,id=t.dataset.id;
