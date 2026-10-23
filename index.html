@@ -158,7 +158,7 @@ function ymd(o){var d=new Date();d.setDate(d.getDate()+o);return d.getFullYear()
 function dd(s){var p=s.split('-'),d=new Date(+p[0],p[1]-1,+p[2]),t=new Date();t=new Date(t.getFullYear(),t.getMonth(),t.getDate());return Math.round((d-t)/864e5)}
 function fd(s){var p=s.split('-');return new Date(+p[0],p[1]-1,+p[2]).toLocaleDateString([],{month:'short',day:'numeric'})}
 function seed(){var n=Date.now(),H=3600000;return{
-pts:{Courage:4,Charm:6,Knowledge:8},
+pts:{Courage:0,Charm:0,Knowledge:0},
 ops:[{id:1,name:'Thesis draft due',due:ymd(4)}],
 tasks:[{id:1,t:'Run 3 km',slot:'early',stat:'Courage',done:true},{id:2,t:'Lit review, ch. 2',slot:'day',stat:'Knowledge',done:true},{id:3,t:'Coffee with Maya',slot:'aft',stat:'Charm',done:false},{id:4,t:'Gym',slot:'aft',stat:'Courage',done:false},{id:5,t:'Study',slot:'aft',stat:'Knowledge',done:false},{id:6,t:'Call Mom',slot:'eve',stat:'Charm',done:false}],
 bonds:[{id:1,num:'VII',name:'The Chariot',cat:'Fitness',rank:6,note:'Ran today · next rank in 2 sessions',photo:null,list:[{t:'Run 3 times this week',d:true},{t:'Try a new route',d:false,due:ymd(3)}]},
@@ -169,7 +169,8 @@ bonds:[{id:1,num:'VII',name:'The Chariot',cat:'Fitness',rank:6,note:'Ran today �
 acts:[],
 hist:[],
 jr:[{id:1,t:'Email supervisor about draft',d:false},{id:2,t:'Buy groceries',d:false},{id:3,t:'Book dentist',d:true}]}}
-function norm(s){s.pts=s.pts||{Courage:4,Charm:6,Knowledge:8};STATS.forEach(function(k){if(typeof s.pts[k]!=='number')s.pts[k]=0});s.ops=s.ops||[{id:1,name:'Thesis draft due',due:ymd(4)}];if(!s.mp){s.mp={};s.mp[ym()]={Courage:s.pts.Courage||0,Charm:s.pts.Charm||0,Knowledge:s.pts.Knowledge||0}}s.tasks=(s.tasks||[]).filter(function(t){return t.slot!=='dark'});if(!s.lib){var nw=Date.now(),DY=864e5,lb={};s.tasks.forEach(function(t){lb[t.t.toLowerCase()]={t:t.t,stat:t.stat,slot:t.slot,last:t.done?nw:nw-14*DY}});[['Pixel game session','Knowledge','eve',9],['Call a friend','Charm','eve',16],['Cold shower','Courage','early',24]].forEach(function(x){var k=x[0].toLowerCase();if(!lb[k])lb[k]={t:x[0],stat:x[1],slot:x[2],last:nw-x[3]*DY}});s.lib=Object.keys(lb).map(function(k){return lb[k]})}s.bonds=s.bonds||[];s.bonds.forEach(function(b){b.arch=!!b.arch;b.notes=b.notes||'';b.list=b.list||[]});s.acts=s.acts||[];s.acts.forEach(function(a){a.arch=!!a.arch});s.plan=s.plan||[];if(!s.rolled)s.rolled=ymd(0);s.hist=s.hist||[];s.jr=s.jr||[];s.jtrash=s.jtrash||[];
+function norm(s){s.pts=s.pts||{Courage:0,Charm:0,Knowledge:0};STATS.forEach(function(k){if(typeof s.pts[k]!=='number')s.pts[k]=0});s.ops=s.ops||[{id:1,name:'Thesis draft due',due:ymd(4)}];if(!s.mp){s.mp={};s.mp[ym()]={Courage:s.pts.Courage||0,Charm:s.pts.Charm||0,Knowledge:s.pts.Knowledge||0}}s.tasks=(s.tasks||[]).filter(function(t){return t.slot!=='dark'});if(!s.lib){var nw=Date.now(),DY=864e5,lb={};s.tasks.forEach(function(t){lb[t.t.toLowerCase()]={t:t.t,stat:t.stat,slot:t.slot,last:t.done?nw:nw-14*DY}});[['Pixel game session','Knowledge','eve',9],['Call a friend','Charm','eve',16],['Cold shower','Courage','early',24]].forEach(function(x){var k=x[0].toLowerCase();if(!lb[k])lb[k]={t:x[0],stat:x[1],slot:x[2],last:nw-x[3]*DY}});s.lib=Object.keys(lb).map(function(k){return lb[k]})}s.bonds=s.bonds||[];s.bonds.forEach(function(b){b.arch=!!b.arch;b.notes=b.notes||'';b.list=b.list||[]});s.acts=s.acts||[];s.acts.forEach(function(a){a.arch=!!a.arch});s.plan=s.plan||[];if(!s.rolled)s.rolled=ymd(0);s.hist=s.hist||[];s.jr=s.jr||[];s.jtrash=s.jtrash||[];
+if(!s.ptsReset){s.mp=s.mp||{};s.mp[ym()]={Courage:0,Charm:0,Knowledge:0};s.ptsReset=true}
 if(!s.empressGone){s.bonds=s.bonds.filter(function(b){return b.name!=='The Empress'});s.empressGone=true}
 if(!s.rankless){s.bonds.forEach(function(b){if(b.note==='Ran today · next rank in 2 sessions')b.note='Ran today';if(b.note==='Needs Knowledge: Sharp to rank up')b.note=''});s.rankless=true}
 if(!s.cleaned){var rm=['thesis','reading','working out'];s.acts=s.acts.filter(function(a){return rm.indexOf(a.name.toLowerCase())<0});s.hist=s.hist.filter(function(h){return rm.indexOf(h.name.toLowerCase())<0});s.cleaned=true}
@@ -347,6 +348,7 @@ if(a==='jres'){var j2=by(S.jtrash,id);if(j2){S.jr.unshift(j2);S.jtrash=S.jtrash.
 if(a==='jtr'){showTrash=!showTrash}
 closeSheet();render()});
 document.addEventListener('keydown',function(e){if(e.key!=='Enter')return;var i=e.target;if(i.id==='jin')document.querySelector('[data-a=jadd]').click();else if(i.id==='dti')document.querySelector('[data-a=dadd]').click();else if(i.tagName==='INPUT'&&i.type!=='file'&&$('sheet').classList.contains('on')){var o=document.querySelector('[data-a=ok]');if(o)o.click()}});
+try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}
 var lastSlot=curSlot();setInterval(function(){if(rollPlan())render();if(lastSlot!==curSlot()){lastSlot=curSlot();rToday()}},30000);
 setInterval(function(){if(tab!=='dark')return;var tot=today().reduce(function(s,x){return counts(x.name)?s+x.ms:s},0);S.acts.forEach(function(a){if(counts(a.name))tot+=el(a);var n=document.querySelector('.tm[data-id="'+a.id+'"]');if(n)n.textContent=fmt(el(a))});var t=$('tot');if(t)t.textContent=fmtHM(tot)},1000);
 render();
