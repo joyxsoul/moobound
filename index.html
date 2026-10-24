@@ -263,7 +263,7 @@ function pad(n){return(n<10?'0':'')+n}
 function fmt(ms){var s=Math.floor(ms/1000),h=Math.floor(s/3600),m=Math.floor(s%3600/60);return(h?h+':'+pad(m):pad(m))+':'+pad(s%60)}
 function fmtDH(ms){var d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/36e5);if(!d&&!h)return Math.max(1,Math.round(ms/6e4))+' min';return d+(d==1?' day, ':' days, ')+h+(h==1?' hour':' hours')}
 function counts(n){return!/doom/i.test(n)}
-function fmtH(ms){var h=Math.round(ms/36e5*10)/10;if(h<0.1)return'&lt;0.1 hours';return(h%1?h.toFixed(1):String(h))+(h==1?' hour':' hours')}
+function fmtH(ms){var m=Math.round(ms/6e4);if(m<1)return'&lt;1 min';var h=Math.floor(m/60),r=m%60;return(h?h+' hr'+(r?' '+r+' min':''):r+' min')}
 function fmtHM(ms){var h=Math.floor(ms/36e5);return h+'h '+Math.floor(ms%36e5/6e4)+'m'}
 function fmtD(ms){var s=Math.round(ms/1000),h=Math.floor(s/3600),m=Math.floor(s%3600/60);return h?h+'h '+m+'m':m?m+'m':s+'s'}
 function el(a){return a.acc+(a.since?Date.now()-a.since:0)}
@@ -308,7 +308,7 @@ var g=f?f.desc.split(/[.!?]/)[0].trim().slice(0,90):'Add a Focus Floor to get st
 var n=today().length,en=n<=1?'Fresh':n==2?'Warming up':'Getting tired — rest soon';
 var h='<div class="top"><span>DARK HOUR</span></div><div class="big"><b class="disp" id="tot">'+fmtHM(tot)+'</b><span>focused today</span></div>';
 
-h+='<div class="card tired"><span>Energy</span><b>Fresh</b></div><div class="sec"><h3 style="color:#8fb7a3;margin:0">FOCUS FLOOR</h3>'+'<button class="mb fade" data-a="asel">'+(archSel?'Cancel':'Archive')+'</button>'+'</div>';
+h+='<div class="card tired"><span>Energy</span><b>Fresh</b></div><div class="card tired" style="margin-top:8px"><span>Lock card <small style="color:#5f7d70">(can pause videos)</small></span><b data-a="lktog" style="cursor:pointer">'+(S.lk===false?'Off':'On')+'</b></div><div class="sec"><h3 style="color:#8fb7a3;margin:0">FOCUS FLOOR</h3>'+'<button class="mb fade" data-a="asel">'+(archSel?'Cancel':'Archive')+'</button>'+'</div>';
 var tt={};S.hist.forEach(function(x){tt[x.name]=(tt[x.name]||0)+x.ms});
 as.filter(function(a){return!a.arch}).sort(function(a,b){return((tt[b.name]||0)+el(b))-((tt[a.name]||0)+el(a))}).forEach(function(a){var st=status(a);
 h+='<div class="card arow'+(st==='run'?' run':'')+'"><div class="an"'+(archSel?'':' data-a="aren" data-id="'+a.id+'" style="cursor:pointer"')+'><b>'+esc(a.name)+'</b></div>'+(st!=='idle'?'<span class="tm" data-id="'+a.id+'">'+fmt(el(a))+'</span>':'')+(archSel?(st==='idle'?'<button class="pk'+(archPick.indexOf(a.id)>=0?' on':'')+'" data-a="apick" data-id="'+a.id+'" aria-label="Select '+esc(a.name)+'">'+(archPick.indexOf(a.id)>=0?'✓':'')+'</button>':''):(st!=='idle'?'<button class="mb" data-a="end" data-id="'+a.id+'" aria-label="End session">End</button>':'')+'<button class="mb p" data-a="'+(st==='run'?'pause':'start')+'" data-id="'+a.id+'">'+(st==='run'?'Pause':st==='pause'?'Resume':'Evoke')+'</button>')+'</div>'});
@@ -1470,7 +1470,7 @@ if(a==='tmove'){var k2=by(S.tasks,id);k2.slot=t.dataset.s;if(k2.done){k2.done=fa
 if(a==='tmisc'){var tm=by(S.tasks,id);if(tm){S.misc.push({id:++nid,t:tm.t,stat:tm.stat});S.tasks=S.tasks.filter(function(x){return x.id!=id})}}
 if(a==='tdel'){S.tasks=S.tasks.filter(function(x){return x.id!=id})}
 if(a==='opdel'){S.ops=S.ops.filter(function(x){return x.id!=id})}
-if(a==='start'){by(S.acts,id).since=Date.now();lkPlay()}
+if(a==='lktog'){S.lk=S.lk===false;save();lkSync();if(S.lk!==false&&S.acts.some(function(x){return x.since&&!x.arch}))lkPlay()}else if(a==='start'){by(S.acts,id).since=Date.now();lkPlay()}
 if(a==='pause'){var y=by(S.acts,id);y.acc+=Date.now()-y.since;y.since=null}
 if(a==='end'){var z=by(S.acts,id),ms=el(z);if(ms>=1000)S.hist.unshift({name:z.name,at:Date.now(),ms:ms});z.acc=0;z.since=null}
 if(a==='adel'){S.acts=S.acts.filter(function(x){return x.id!=id})}
@@ -1493,13 +1493,13 @@ var LK={au:null,t:'',art:null,s:''};
 function lkAudio(){if(LK.au)return LK.au;try{var n=8000*30,b=new Uint8Array(44+n),v=new DataView(b.buffer),w=function(o,x){for(var i=0;i<x.length;i++)b[o+i]=x.charCodeAt(i)};w(0,'RIFF');v.setUint32(4,36+n,true);w(8,'WAVEfmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,8000,true);v.setUint32(28,8000,true);v.setUint16(32,1,true);v.setUint16(34,8,true);w(36,'data');v.setUint32(40,n,true);for(var i=0;i<n;i++)b[44+i]=(i%400<200)?128:129;var a=new Audio(URL.createObjectURL(new Blob([b],{type:'audio/wav'})));a.loop=true;LK.au=a}catch(e){}return LK.au}
 function lkArt(){if(LK.art)return LK.art;try{var c=document.createElement('canvas');c.width=c.height=256;var x=c.getContext('2d');x.fillStyle='#07102B';x.fillRect(0,0,256,256);x.fillStyle='#DFE6FF';x.beginPath();x.arc(128,128,80,0,7);x.fill();x.fillStyle='#07102B';x.beginPath();x.arc(158,118,76,0,7);x.fill();LK.art=[{src:c.toDataURL('image/png'),sizes:'256x256',type:'image/png'}]}catch(e){LK.art=[]}return LK.art}
 function lkSt(t){LK.s=t;var e=$('lkS');if(e)e.textContent=t}
-function lkPlay(){if(!('mediaSession' in navigator)){lkSt('Lock card: not supported by this browser');return}var a=lkAudio();if(!a){lkSt('Lock card: could not create audio');return}a.onerror=function(){lkSt('Lock card: audio error '+(a.error?a.error.code:''))};try{var p=a.play();if(p&&p.then)p.then(function(){lkSt('Lock card: on (playing silent track)')},function(e){lkSt('Lock card: play blocked ('+(e&&e.name)+')')})}catch(e){lkSt('Lock card: '+e.name)}}
+function lkPlay(){if(S.lk===false)return;if(!('mediaSession' in navigator)){lkSt('Lock card: not supported by this browser');return}var a=lkAudio();if(!a){lkSt('Lock card: could not create audio');return}a.onerror=function(){lkSt('Lock card: audio error '+(a.error?a.error.code:''))};try{var p=a.play();if(p&&p.then)p.then(function(){lkSt('Lock card: on (playing silent track)')},function(e){lkSt('Lock card: play blocked ('+(e&&e.name)+')')})}catch(e){lkSt('Lock card: '+e.name)}}
 function lkCur(){var r=S.acts.filter(function(a){return a.since&&!a.arch})[0];if(r){LK.last=r.id;return r}var p=by(S.acts,LK.last);return p&&!p.arch&&!p.since&&p.acc>0?p:null}
-function lkSync(){if(!('mediaSession' in navigator))return;var a=lkCur(),ms=navigator.mediaSession;try{if(!a){if(LK.au)LK.au.pause();if(LK.t){ms.playbackState='none';ms.metadata=null;LK.t=''}return}
+function lkSync(){if(!('mediaSession' in navigator))return;var a=lkCur(),ms=navigator.mediaSession;try{if(S.lk===false){if(LK.au&&!LK.au.paused)LK.au.pause();if(LK.t){ms.playbackState='none';ms.metadata=null;LK.t=''}return}if(!a){if(LK.au)LK.au.pause();if(LK.t){ms.playbackState='none';ms.metadata=null;LK.t=''}return}
 var run=!!a.since,t=a.name+' · '+fmt(el(a))+(run?'':' (paused)');
 if(t!==LK.t){LK.t=t;ms.metadata=new MediaMetadata({title:t,artist:'Dark Hour',album:run?'Tracking':'Paused',artwork:lkArt()})}
 ms.playbackState=run?'playing':'paused';
-if(run&&LK.au&&LK.au.paused)lkPlay()}catch(e){}}
+if(run&&LK.au&&LK.au.paused)lkPlay();if(!run&&LK.au&&!LK.au.paused)LK.au.pause()}catch(e){}}
 (function(){if(!('mediaSession' in navigator))return;var ms=navigator.mediaSession;function set(n,f){try{ms.setActionHandler(n,f)}catch(e){}}
 set('pause',function(){var a=lkCur();if(a&&a.since){a.acc+=Date.now()-a.since;a.since=null;save();render()}});
 set('play',function(){var a=lkCur();if(a&&!a.since){a.since=Date.now();lkPlay();save();render()}});
