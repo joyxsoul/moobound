@@ -288,7 +288,7 @@ h+='</div></div>'});
 h+='<div class="btnrow"><button class="addop" data-a="cpopen">Compendium ('+cpList().length+')</button><button class="addop" data-a="glopen">At A Glance</button></div>';
 var mo=S.mp[ym()]||{};h+='<div class="sec slim" style="margin-top:14px"><h3>SOCIAL STATS</h3><button class="tg" data-a="sttog">'+(stOpen?'Hide \u25b4':'Show \u25be')+'</button></div>';if(stOpen)h+='<div class="stats" style="margin-top:8px">'+STATS.map(function(k){return'<div data-a="pillar" data-id="'+k+'" style="cursor:pointer">'+k+'<small style="display:block;margin-top:4px">'+(mo[k]||0)+' pts</small></div>'}).join('')+'</div>';
 
-h+=sqHtml();h+='<div class="sec slim" style="margin-top:22px"><h3>7-DAY TREND</h3><button class="tg" data-a="chopen">'+(chOpen?'Hide \u25b4':'Show \u25be')+'</button></div>';if(chOpen)h+=statChart();
+h+=sqHtml();h+='<div class="sec slim" style="margin-top:22px"><h3>LAST 7 DAYS</h3><button class="tg" data-a="chopen">'+(chOpen?'Hide \u25b4':'Show \u25be')+'</button></div>';if(chOpen)h+=statChart();
 $('today').innerHTML=h}
 
 var qdT='',qdS='Knowledge',qdOpen=false,stOpen=false,sqOpen=false;
@@ -357,16 +357,16 @@ var DING_B64='SUQzBAAAAAABAFRYWFgAAAASAAADbWFqb3JfYnJhbmQAbXA0MgBUWFhYAAAAEQAAA2
 function dingLoad(){var c=chCtx();if(!c||dingBuf||dingBusy)return;dingBusy=true;try{var bin=atob(DING_B64),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);c.decodeAudioData(u.buffer,function(b){dingBuf=b;dingBusy=false},function(){dingBusy=false})}catch(e){dingBusy=false}}
 function ding(){try{var c=chCtx();if(c&&dingBuf){var src=c.createBufferSource();src.buffer=dingBuf;src.connect(c.destination);src.start(0);return}dingLoad();var a=new Audio('data:audio/mpeg;base64,'+DING_B64);a.play().catch(function(){})}catch(e){}}
 document.addEventListener('pointerdown',function(){dingLoad()},{once:true});
-var chOpen=false,chHide={},CHC={Knowledge:'#5fd0ff',Courage:'#ff9a6a',Charm:'#ff7fb0',Diligence:'#9be564',Understanding:'#c49bff'};
-function statChart(){var days=[],i;for(i=6;i>=0;i--)days.push(ymd(-i));var by0={};STATS.forEach(function(k){by0[k]=days.map(function(){return 0})});(S.pl||[]).forEach(function(e){var ix=days.indexOf(e.d);if(ix>=0&&by0[e.s])by0[e.s][ix]+=e.p});
-var vis=STATS.filter(function(k){return!chHide[k]}),mx=3;vis.forEach(function(k){by0[k].forEach(function(v){if(v>mx)mx=v})});mx=Math.ceil(mx/2)*2;
-var W=340,H=170,L=26,R=10,T=10,B=24,pw=W-L-R,ph=H-T-B,X=function(i){return L+pw*i/6},Y=function(v){return T+ph-ph*v/mx};
+var chOpen=true,chHide={},CHC={Knowledge:'#5fd0ff',Courage:'#ff9a6a',Charm:'#ff7fb0',Diligence:'#9be564',Understanding:'#c49bff'};
+function statChart(){var days=[],i,tt=[0,0,0,0,0,0,0];for(i=6;i>=0;i--)days.push(ymd(-i));(S.pl||[]).forEach(function(e){var ix=days.indexOf(e.d);if(ix>=0)tt[ix]+=e.p});
+var mx=3;tt.forEach(function(v){if(v>mx)mx=v});mx=Math.ceil(mx/2)*2;var tot=tt.reduce(function(a,b){return a+b},0);
+var W=340,H=170,L=26,R=12,T=14,B=24,pw=W-L-R,ph=H-T-B,X=function(i){return L+pw*i/6},Y=function(v){return T+ph-ph*v/mx};
 var g='';[0,mx/2,mx].forEach(function(v){g+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="#1b2859" stroke-width="1"/><text x="'+(L-5)+'" y="'+(Y(v)+3)+'" text-anchor="end" font-size="9" fill="#6f7fae">'+v+'</text>'});
 days.forEach(function(d,ix){var dt=new Date(d+'T00:00:00');g+='<text x="'+X(ix)+'" y="'+(H-8)+'" text-anchor="middle" font-size="9" fill="'+(ix===6?'#cfe3ff':'#6f7fae')+'">'+dt.toLocaleDateString('en-US',{weekday:'short'})+'</text>'});
-vis.forEach(function(k){var pts=by0[k].map(function(v,ix){return X(ix).toFixed(1)+','+Y(v).toFixed(1)}).join(' ');g+='<polyline points="'+pts+'" fill="none" stroke="'+CHC[k]+'" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>';by0[k].forEach(function(v,ix){g+='<circle cx="'+X(ix).toFixed(1)+'" cy="'+Y(v).toFixed(1)+'" r="2.6" fill="'+CHC[k]+'"/>'})});
-var tot=0;STATS.forEach(function(k){by0[k].forEach(function(v){tot+=v})});
-var lg='<div style="display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:6px;justify-content:center">'+STATS.map(function(k){var sm=by0[k].reduce(function(a,b){return a+b},0);return'<button data-a="chtog" data-id="'+k+'" style="background:none;border:0;color:'+(chHide[k]?'#4d5a85':'#cfe3ff')+';font:500 11px var(--body);display:flex;align-items:center;gap:5px;cursor:pointer;padding:2px 0"><i style="width:9px;height:9px;border-radius:50%;background:'+(chHide[k]?'#34437f':CHC[k])+';display:inline-block"></i>'+k+' '+sm+'</button>'}).join('')+'</div>';
-return'<div class="card" style="margin-top:10px;padding:12px 10px 8px"><div style="font-size:10px;letter-spacing:.12em;color:#8d9bc8;margin:0 4px 4px">LAST 7 DAYS · POINTS PER DAY</div>'+(tot?'':'<div class="none" style="margin:4px 0">Finish tasks to see your trend.</div>')+'<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Social stats over the last 7 days">'+g+'</svg>'+lg+'</div>'}
+var pts=tt.map(function(v,ix){return X(ix).toFixed(1)+','+Y(v).toFixed(1)}).join(' ');
+g+='<polygon points="'+X(0).toFixed(1)+','+Y(0)+' '+pts+' '+X(6).toFixed(1)+','+Y(0)+'" fill="#5fd0ff" fill-opacity=".14"/><polyline points="'+pts+'" fill="none" stroke="#5fd0ff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>';
+tt.forEach(function(v,ix){g+='<circle cx="'+X(ix).toFixed(1)+'" cy="'+Y(v).toFixed(1)+'" r="3" fill="#5fd0ff"/>'+(v?'<text x="'+X(ix).toFixed(1)+'" y="'+(Y(v)-7).toFixed(1)+'" text-anchor="middle" font-size="9" fill="#cfe3ff">'+v+'</text>':'')});
+return'<div class="card" style="margin-top:10px;padding:12px 10px 8px"><div style="display:flex;justify-content:space-between;font-size:10px;letter-spacing:.12em;color:#8d9bc8;margin:0 4px 4px"><span>ALL STATS · POINTS PER DAY</span><span>'+tot+' TOTAL</span></div>'+(tot?'':'<div class="none" style="margin:4px 0">Finish tasks to see your trend.</div>')+'<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Total social stat points over the last 7 days">'+g+'</svg></div>'}
 function medFmt(t){t=Math.max(0,Math.round(t));return Math.floor(t/60)+':'+pad(t%60)}
 function medRem(){return S.med.end?Math.max(0,Math.ceil((S.med.end-Date.now())/1000)):0}
 function rMed(){var m=S.med,run=!!m.end,ps=!!m.pz,busy=run||ps;
