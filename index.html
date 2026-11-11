@@ -74,6 +74,7 @@ button{font-family:inherit}
 .moodp #dark .sec button.fadd,.moodp #dark button.fadd{color:var(--a)!important;background:var(--k)!important}
 .moodp .mvb{background:var(--c)!important;box-shadow:3px 3px 0 var(--k);border:2px solid var(--k)}.moodp .mvb h5,.moodp .mvb h5 b{color:var(--k)!important}.moodp .mvr{outline:2px solid var(--k);box-shadow:3px 3px 0 var(--k)}.moodp .mvr:before,.moodp .mvr:after{background:var(--c)!important}.moodp .mvr textarea.mvi{color:#2b1d0a!important;background:transparent!important;border:0!important;border-bottom:1px dotted #b99b5c!important;box-shadow:none!important;border-radius:0!important}.moodp .mvr textarea.mvi::placeholder{color:#9a8556!important;opacity:1}.moodp .mvr .mvc{border-color:#2b1d0a!important;color:#b3261e!important}.moodp .mvr .mva button,.moodp .mvr .x{color:#2b1d0a!important;border-color:#8a6d33!important}.moodp .mvr b{color:#2b1d0a!important}.moodp .mvr .mvlm{color:#2b1d0a!important;border-color:#8a6d33!important}.moodp .mvr.lim .mvlm{background:#2b1d0a!important;color:#ffe27a!important;border-color:#2b1d0a!important}.moodp .mvr.lim textarea.mvi{border-bottom-color:#a86f00!important}.moodp .mvr small{color:#8a6d33!important}.moodp .mvadd{color:var(--k)!important;border-color:var(--k)!important}
 .moodp .probc .ck i{color:inherit!important;border-color:currentColor!important}.moodp .probc .ck.d i{background:currentColor!important;-webkit-text-fill-color:var(--c)}.moodp .probc input::placeholder{color:var(--m)!important;opacity:.9}
+.moodp .slot:not(.now){opacity:.7}.moodp .slot.now{box-shadow:0 0 0 3px var(--k),4px 4px 0 var(--k)}.moodp .slot .l span.nowb{background:var(--k)!important;color:var(--a)!important}
 .moodp #sheet,.moodp #sheet .panel{--tx:#eaf0ff;--mu:#9aa8d0;color:#eaf0ff}
 .moodp input:not([type=checkbox]),.moodp select,.moodp textarea{background:rgba(255,255,255,.75)!important;color:var(--k)!important;border:1.5px solid var(--k)!important}
 .moodp #sheet input,.moodp #sheet select,.moodp #sheet textarea{background:#0a1330!important;color:#eaf0ff!important;border:1px solid #33478f!important}
@@ -173,6 +174,7 @@ h3{font-size:12px;letter-spacing:.14em;color:var(--mu);margin:22px 0 4px;font-we
 .slot .t{font-family:var(--disp);font-style:italic;font-weight:700;font-size:19px;color:#b6c2e8;text-transform:uppercase;line-height:1}
 .slot .h{font-size:10px;color:#7482ad;margin-top:3px;text-transform:uppercase;letter-spacing:.06em}
 .slot .r{flex:1;min-width:0}
+.slot{transition:opacity .2s}.slot:not(.now){opacity:.6}.slot.now{background:#182f6e;box-shadow:0 0 0 2px var(--cy),0 0 20px rgba(90,200,255,.35)}.slot.night.now{background:#123a22}.nowb{display:inline-block;margin-top:7px;font:800 9px var(--body);letter-spacing:.16em;color:#07102b;background:var(--cy);border-radius:99px;padding:3px 9px}
 .slot.night{background:#0e2418}.slot.night .t{color:var(--gr)}.slot.now .t,.slot.night.now .t{color:var(--cy);text-shadow:0 0 10px rgba(90,200,255,.45)}
 .none{font-size:13px;color:#6573a0;padding:6px 0}
 .task{display:grid;grid-template-columns:minmax(0,1fr) 114px;align-items:stretch;width:100%;background:none;border:0;color:var(--tx);padding:3px 0;border-radius:10px;cursor:pointer;min-height:36px}
@@ -510,7 +512,7 @@ h+='<div class="card ops"><div class="list">'+(ops.length?ops.map(function(o){va
 h+=ciHtml();h+=ofHtml();
 h+='<div class="sec tt"><h3>TODAY’S TIME</h3></div><div class="grp tt3"><button class="pill alt" data-a="tplan">Planner</button><button class="pill grn" data-a="tquick">Quick Time</button></div>';
 SLOTS.forEach(function(s){var ts=S.tasks.filter(function(t){return t.slot===s.k}).sort(function(a,b){return String(a.t).localeCompare(String(b.t),undefined,{sensitivity:'base'})});
-h+='<div class="slot'+(s.k==='dark'?' night':'')+(s.k===curSlot()?' now':'')+'"><div class="l"><div class="t">'+s.n+'</div>'+(s.h?'<div class="h">'+s.h+'</div>':'')+'</div><div class="r">';
+h+='<div class="slot'+(s.k==='dark'?' night':'')+(s.k===curSlot()?' now':'')+'"><div class="l"><div class="t">'+s.n+'</div>'+(s.h?'<div class="h">'+s.h+'</div>':'')+(s.k===curSlot()?'<span class="nowb">NOW</span>':'')+'</div><div class="r">';
 var gh=S.rec.filter(function(r){return r.slot===s.k&&r.on!==ymd(0)}).sort(function(a,b){return String(a.t).localeCompare(String(b.t),undefined,{sensitivity:'base'})});h+=gh.map(function(r){return'<button class="task ghost" data-a="recon" data-id="'+r.id+'"><span>'+esc(r.t)+'</span><em>'+r.stat.toUpperCase()+'</em></button>'}).join('');
 h+=ts.length?ts.map(function(t){return'<button class="task'+(t.done?' done':'')+'" data-a="task" data-id="'+t.id+'"><span>'+esc(t.t)+'</span><em>'+(t.done?'+1 ':'')+t.stat.toUpperCase()+'</em></button>'}).join(''):(gh.length?'':'<div class="none">Nothing planned</div>');
 h+='</div></div>'});
