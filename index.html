@@ -356,6 +356,7 @@ nav button{white-space:nowrap}nav button.on{color:var(--cy);font-weight:600}.dar
 .rwc{display:flex;gap:6px;flex-wrap:wrap}.rwc button{flex:1;min-width:0;padding:7px 6px;border-radius:99px;border:1.5px solid #5a6b9a;background:transparent;color:#c4cff0;font:700 12px var(--body)}.rwc button.on{background:#5ac8ff;border-color:#5ac8ff;color:#07102b}
 .rws{margin-top:12px;font:800 15px var(--body)}.rwr{display:flex;justify-content:space-between;gap:10px;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.1);font-size:14px}.rwr span{opacity:.75}
 .moodp .rwc button{border-color:var(--k)!important;color:var(--k)!important;background:transparent!important}.moodp .rwc button.on{background:var(--k)!important;color:var(--a)!important}.moodp .rwr{border-color:var(--k)}
+.moodp .card.rw .rwc button{color:var(--k)!important;-webkit-text-fill-color:var(--k)!important;background:transparent!important;border:1.5px solid var(--k)!important}.moodp .card.rw .rwc button.on{background:var(--k)!important;color:var(--a)!important;-webkit-text-fill-color:var(--a)!important}
 .twb.sum{border-color:#ffd24a}
 #tartarus{--twc:#3df5c0;--tw1:#031a1c;--tw2:#0a3b3a;--twm:#e9fff2}
 #tartarus .twti{color:#7dffe0;text-shadow:0 0 18px rgba(61,245,192,.55),2px 0 0 rgba(255,60,140,.35),-2px 0 0 rgba(60,200,255,.35);letter-spacing:.04em}
@@ -733,11 +734,10 @@ function rwH(h){return(h%12||12)+(h%24<12?' AM':' PM')}
 function rainHtml(){var l=rwLoc();rwFetch(l);var c=rwData[l[0]],td=ymd(0),nh=new Date().getHours(),body;
 if(!c)body='<div class="none">Checking the sky\u2026</div>';
 else if(c.err)body='<div class="none">Couldn\u2019t load the forecast. Tap a place to retry.</div>';
-else{var hs=c.h.filter(function(x){return x.d===td&&x.h>=nh}),rg=[],cur=null;
-hs.forEach(function(x){if(x.p>=30||x.mm>=0.2){if(cur&&x.h===cur.b+1){cur.b=x.h;cur.p=Math.max(cur.p,x.p);cur.mm=Math.max(cur.mm,x.mm)}else{cur={a:x.h,b:x.h,p:x.p,mm:x.mm};rg.push(cur)}}});
+else{var hs=c.h.filter(function(x){return x.d===td&&x.h>=nh}),rg=hs.filter(function(x){return x.p>=30||x.mm>=0.2});
 if(!hs.length)body='<div class="none">Nothing left in today\u2019s forecast.</div>';
 else if(!rg.length)body='<div class="rws">No rain expected for the rest of today</div>';
-else{var pk=Math.max.apply(null,rg.map(function(r){return r.p}));body='<div class="rws">Rain possible \u00b7 peak '+pk+'%</div>'+rg.map(function(r){return'<div class="rwr"><b>'+rwH(r.a)+' \u2013 '+rwH(r.b+1)+'</b><span>up to '+r.p+'%'+(r.mm>=0.1?' \u00b7 '+(r.mm<2.5?'Light':r.mm<7.6?'Moderate':'Heavy'):'')+'</span></div>'}).join('')}}
+else{var pk=Math.max.apply(null,rg.map(function(r){return r.p}));body='<div class="rws">Rain possible \u00b7 peak '+pk+'%</div>'+rg.map(function(r){return'<div class="rwr"><b>'+rwH(r.h)+'</b><span>'+r.p+'%'+(r.mm>=0.1?' \u00b7 '+(r.mm<2.5?'Light':r.mm<7.6?'Moderate':'Heavy'):'')+'</span></div>'}).join('')}}
 return'<div class="sec slim" style="margin-top:14px"><h3>RAIN WATCH</h3></div><div class="card rw"><div class="rwc">'+RWL.map(function(x){return'<button class="'+(x[0]===l[0]?'on':'')+'" data-a="rwl" data-k="'+x[0]+'">'+x[1]+'</button>'}).join('')+'</div>'+body+'</div>'}
 function ofHtml(){var l=ofList();if(!l.length)return'';return'<div class="sec slim" style="margin-top:14px"><h3>INSPIRATION</h3></div><div class="card" style="padding:6px 12px">'+l.map(function(e,i){return'<div class="jrow"><button class="ck" data-a="ofdo" data-i="'+i+'"><i></i><span>'+esc(e.t)+'<small>+1 '+e.stat+'<em style="font-style:normal;font-size:11px;opacity:.6;margin-left:8px">'+(e.n?e.n+'× in 30 days':'from your list')+'</em></small></span></button></div>'}).join('')+'</div>'}
 function ciHtml(){var t=ymd(0),it=[['Invigorate',((S.med.log||{})[t]||0)>0],['Gratitude',!!(S.grat||{})[t]],['Frugal',!!(S.nsp||{})[t]],['Meal',!!(S.diet||{})[t]]];return'<button class="cichk" data-a="goinv" aria-label="Open Invigorate check-ins">'+it.map(function(x){return'<span class="'+(x[1]?'on':'')+'"><i>'+(x[1]?'\u2713':'')+'</i>'+x[0]+'</span>'}).join('')+'</button>'}
