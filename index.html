@@ -728,18 +728,19 @@ var inToday={};cur.forEach(function(x){inToday[String(x.t).toLowerCase()]=1});
 var r=Object.keys(m).map(function(k){return m[k]}).filter(function(e){return e.n>=3&&!inToday[e.t.toLowerCase()]}).sort(function(a,b){return b.n-a.n}).slice(0,4);if(r.length<4){var seen={};r.forEach(function(e){seen[e.t.toLowerCase()]=1});(S.lib||[]).slice().sort(function(a,b){return(b.last||0)-(a.last||0)}).forEach(function(x){var k=x.t.toLowerCase();if(r.length<4&&!seen[k]&&!inToday[k]){seen[k]=1;r.push({t:x.t,stat:x.stat,n:0})}})}return r}
 var RWL=[['dt','Duboce Triangle',37.7691,-122.4337],['dp','Dogpatch',37.7576,-122.3880]],rwData={},rwBusy={};
 function rwLoc(){return RWL.filter(function(x){return x[0]===S.rwl})[0]||RWL[0]}
-function rwFetch(l){var c=rwData[l[0]];if(rwBusy[l[0]]||(c&&Date.now()-c.at<(c.err?12e4:18e5)))return;rwBusy[l[0]]=1;
-fetch('https://api.open-meteo.com/v1/forecast?latitude='+l[2]+'&longitude='+l[3]+'&hourly=precipitation_probability,precipitation&timezone=America%2FLos_Angeles&forecast_days=1').then(function(r){return r.json()}).then(function(j){var T=j.hourly.time,P=j.hourly.precipitation_probability,M=j.hourly.precipitation;rwData[l[0]]={at:Date.now(),h:T.map(function(t,i){return{d:t.slice(0,10),h:+t.slice(11,13),p:P[i]||0,mm:M[i]||0}})}}).catch(function(){rwData[l[0]]={at:Date.now(),err:1}}).then(function(){rwBusy[l[0]]=0;if(tab==='today')rToday()})}
+function rwFetch(l){var c=rwData[l[0]];if(rwBusy[l[0]]||(c&&Date.now()-c.at<(c.err?6e4:(c.stale?12e4:18e5))))return;rwBusy[l[0]]=1;
+var ac=window.AbortController?new AbortController():null,tm=setTimeout(function(){if(ac)ac.abort()},12000);
+fetch('https://api.open-meteo.com/v1/forecast?latitude='+l[2]+'&longitude='+l[3]+'&hourly=precipitation_probability,precipitation&timezone=America%2FLos_Angeles&forecast_days=1',ac?{signal:ac.signal}:{}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(function(j){if(!j||!j.hourly||!j.hourly.time)throw new Error(j&&j.reason?String(j.reason):'bad response');var T=j.hourly.time,P=j.hourly.precipitation_probability||[],M=j.hourly.precipitation||[];var d={at:Date.now(),h:T.map(function(t,i){return{d:t.slice(0,10),h:+t.slice(11,13),p:P[i]||0,mm:M[i]||0}})};rwData[l[0]]=d;try{localStorage.setItem('moonbound-rain-'+l[0],JSON.stringify(d))}catch(x){}}).catch(function(er){var old=null;try{old=JSON.parse(localStorage.getItem('moonbound-rain-'+l[0])||'null')}catch(x){}if(old&&old.h&&old.h.some(function(x){return x.d===ymd(0)})){old.stale=old.at;old.at=Date.now();rwData[l[0]]=old}else rwData[l[0]]={at:Date.now(),err:(er&&er.name==='AbortError')?'timed out':(navigator.onLine===false?'offline':String(er&&er.message||er).slice(0,40))}}).then(function(){clearTimeout(tm);rwBusy[l[0]]=0;if(tab==='today')rToday()})}
 var RWK=[['Faint','#d6efff','#0b1f66'],['Light','#8cc4f0','#0b1f66'],['Moderate','#3f6fc0','#fff'],['Heavy','#0b1f66','#fff']];
 function rwK(mm){return RWK[mm<0.1?0:mm<2.5?1:mm<7.6?2:3]}
 function rwCol(t){var a=[191,230,255],b=[11,31,102];return'rgb('+a.map(function(v,i){return Math.round(v+(b[i]-v)*t)}).join(',')+')'}
 function rwH(h){return(h%12||12)+(h%24<12?' AM':' PM')}
 function rainHtml(){var l=rwLoc();rwFetch(l);var c=rwData[l[0]],td=ymd(0),nh=new Date().getHours(),body;
 if(!c)body='<div class="none">Checking the sky\u2026</div>';
-else if(c.err)body='<div class="none">Couldn\u2019t load the forecast. Tap a place to retry.</div>';
+else if(c.err)body='<div class="none">Couldn\u2019t load the forecast ('+esc(c.err)+').</div><button class="tg rwt" data-a="rwretry">Retry</button>';
 else{var hs=c.h.filter(function(x){return x.d===td&&x.h>=nh}),rg=hs.filter(function(x){return x.p>=30||x.mm>=0.2});
 if(!hs.length)body='<div class="none">Nothing left in today\u2019s forecast.</div>';
-else{var soon=rg.filter(function(x){return x.h<nh+3}).length>0,nx=rg[0];body='<div class="rws">'+(soon?'Rain possible soon':'Rain not possible soon')+'</div>'+(!soon&&nx?'<div class="rwn">Next chance: '+rwH(nx.h)+'</div>':'');
+else{var stl=c.stale?'<div class="rwn">Offline \u00b7 showing forecast saved at '+new Date(c.stale).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+'</div>':'';var soon=rg.filter(function(x){return x.h<nh+3}).length>0,nx=rg[0];body='<div class="rws">'+(soon?'Rain possible soon':'Rain not possible soon')+'</div>'+(!soon&&nx?'<div class="rwn">Next chance: '+rwH(nx.h)+'</div>':'')+stl;
 if(rg.length){body+='<button class="tg rwt" data-a="rwtog">'+(S.rwo?'Hide hourly \u25b4':'Show hourly \u25be')+'</button>';if(S.rwo)body+='<div class="rwl">'+RWK.map(function(k){return'<span><i style="background:'+k[1]+'"></i>'+k[0]+'</span>'}).join('')+'</div><div class="rwh">Color = how hard it rains \u00b7 % = chance of rain</div>'+rg.map(function(r){var k=rwK(r.mm);return'<div class="rwr" style="background:'+k[1]+'"><b style="color:'+k[2]+'!important">'+rwH(r.h)+'</b><span style="color:'+k[2]+'!important;opacity:1">'+r.p+'% chance \u00b7 '+k[0]+'</span></div>'}).join('')}}}
 return'<div class="sec slim" style="margin-top:14px"><h3>RAIN WATCH</h3></div><div class="card rw"><div class="rwc">'+RWL.map(function(x){return'<button class="'+(x[0]===l[0]?'on':'')+'" data-a="rwl" data-k="'+x[0]+'">'+x[1]+'</button>'}).join('')+'</div>'+body+'</div>'}
 function ofHtml(){var l=ofList();if(!l.length)return'';return'<div class="sec slim" style="margin-top:14px"><h3>INSPIRATION</h3></div><div class="card" style="padding:6px 12px">'+l.map(function(e,i){return'<div class="jrow"><button class="ck" data-a="ofdo" data-i="'+i+'"><i></i><span>'+esc(e.t)+'<small>+1 '+e.stat+'<em style="font-style:normal;font-size:11px;opacity:.6;margin-left:8px">'+(e.n?e.n+'× in 30 days':'from your list')+'</em></small></span></button></div>'}).join('')+'</div>'}
@@ -1989,7 +1990,8 @@ if(a==='opdel'){S.ops=S.ops.filter(function(x){return x.id!=id})}
 if(a==='lktog'){S.lk=S.lk===false;save();lkSync();if(S.lk!==false&&S.acts.some(function(x){return x.since&&!x.arch}))lkPlay()}else if(a==='start'){var sa=by(S.acts,id);if(!sa.since&&!(sa.acc>0))evokeSnd();sa.since=Date.now();lkPlay()}
 if(a==='pause'){var y=by(S.acts,id);y.acc+=Date.now()-y.since;y.since=null}
 if(a==='rwtog'){S.rwo=!S.rwo;save();rToday();return}
-if(a==='rwl'){S.rwl=t.dataset.k;save();rToday();return}
+if(a==='rwretry'){delete rwData[rwLoc()[0]];rToday();return}
+if(a==='rwl'){S.rwl=t.dataset.k;if(rwData[t.dataset.k]&&rwData[t.dataset.k].err)delete rwData[t.dataset.k];save();rToday();return}
 if(a==='twnew'){twSheet(null);return}
 if(a==='twedit'){var tw=by(S.tw,id);if(tw)twSheet(tw);return}
 if(a==='twtog'){twOpen=!twOpen;rTartarus();return}
