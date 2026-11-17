@@ -665,6 +665,7 @@ function hsDur(ms){var m=Math.round(ms/6e4),h=Math.floor(m/60);return h?h+'h '+p
 function hsSheet(n){var L=S.hist.filter(function(x){return x.name===n&&sameDay(x.at)});sheet(esc(n)+' \u00b7 today',L.length?L.map(function(x){return'<button class="opt" data-a="hedit" data-n="'+esc(n)+'" data-at="'+x.at+'">'+hm(new Date(x.at-x.ms))+' \u2013 '+hm(new Date(x.at))+' \u00b7 '+hsDur(x.ms)+'</button>'}).join(''):'<div class="none">No sessions.</div>',null)}
 function hsEdit(n,at){var x=S.hist.filter(function(h){return h.name===n&&h.at===at})[0];if(!x)return;var st=new Date(x.at-x.ms),t0=new Date();t0.setHours(0,0,0,0);var s0=new Date(st);s0.setHours(0,0,0,0);var off=Math.max(0,Math.min(6,Math.round((t0-s0)/864e5)));
 sheet('Edit session','<div class="hint">'+esc(n)+' \u00b7 '+hsDur(x.ms)+'. If the end time is earlier than the start, it counts as the next day (overnight).</div><label for="ad">Start day</label><select id="ad">'+[0,1,2,3,4,5,6].map(function(i){return'<option value="'+i+'"'+(i===off?' selected':'')+'>'+(i?i===1?'Yesterday':i+' days ago':'Today')+'</option>'}).join('')+'</select><div style="display:flex;gap:8px;margin-top:8px"><div style="flex:1"><label for="as" style="margin-top:0">Start</label><input id="as" type="time" value="'+hm(st)+'"></div><div style="flex:1"><label for="ae" style="margin-top:0">End</label><input id="ae" type="time" value="'+hm(new Date(x.at))+'"></div></div><div id="aerr" class="lab" style="color:#ff8a8a;margin-top:6px"></div><button class="opt" data-a="hsave" data-n="'+esc(n)+'" data-at="'+at+'">Save changes</button><button class="opt dg" data-a="hdel" data-n="'+esc(n)+'" data-at="'+at+'">Delete this session</button>',null)}
+function trmAct(make){var a=S.acts.filter(function(x){return!x.arch&&/^[^a-z]*treadmill\s*$/i.test(x.name)})[0];if(!a&&make){a={id:++nid,name:'Treadmill',desc:'Hermes run',acc:0,since:null};S.acts.push(a)}return a}
 function el(a){return a.acc+(a.since?Date.now()-a.since:0)}
 function sameDay(t){return new Date(t).toDateString()===new Date().toDateString()}
 function status(a){return a.since?'run':a.acc>0?'pause':'idle'}
@@ -1983,11 +1984,11 @@ if(a==='wkdel'){var wd2=t.dataset.d;S.wk[wd2]=(S.wk[wd2]||[]).filter(function(e)
 if(a==='wkpnew'){wkPSheet(null);return}
 if(a==='wkpedit'){var wp=wkPart(id);if(wp)wkPSheet(wp);return}
 if(a==='wkpdel'){S.wkp=S.wkp.filter(function(p){return p.id!==id});Object.keys(S.wk).forEach(function(k){S.wk[k]=S.wk[k].filter(function(e){return e.p!==id});if(!S.wk[k].length)delete S.wk[k]});save();closeSheet();rToday();return}
-if(a==='runstart'){S.run={st:'run',t0:Date.now(),acc:0};save();rToday();return}
-if(a==='runpause'){var r1=S.run;r1.acc=runMs();r1.st='pause';save();rToday();return}
-if(a==='runres'){var r2=S.run;r2.t0=Date.now();r2.st='run';save();rToday();return}
-if(a==='runfin'){var r3=S.run;r3.acc=runMs();r3.st='pause';save();rToday();runSheet();return}
-if(a==='rundis'){S.run={st:'idle',t0:0,acc:0};save();closeSheet();rToday();return}
+if(a==='runstart'){S.run={st:'run',t0:Date.now(),acc:0};var tm=trmAct(true);if(tm){S.run.tm=tm.id;if(!tm.since){tm.since=Date.now();lkPlay()}}save();render();return}
+if(a==='runpause'){var r1=S.run;r1.acc=runMs();r1.st='pause';var tp=by(S.acts,r1.tm);if(tp&&tp.since){tp.acc+=Date.now()-tp.since;tp.since=null}save();render();return}
+if(a==='runres'){var r2=S.run;r2.t0=Date.now();r2.st='run';var tr=by(S.acts,r2.tm);if(tr&&!tr.since){tr.since=Date.now();lkPlay()}save();render();return}
+if(a==='runfin'){var r3=S.run;r3.acc=runMs();r3.st='pause';var tf=by(S.acts,r3.tm);if(tf){var tms=el(tf);if(tms>=1000){r3.tl=Date.now();S.hist.unshift({name:tf.name,at:r3.tl,ms:tms});S.hist.sort(function(x,y){return y.at-x.at})}tf.acc=0;tf.since=null}save();render();runSheet();return}
+if(a==='rundis'){var td0=by(S.acts,S.run.tm);if(td0){td0.acc=0;td0.since=null}if(S.run.tl)S.hist=S.hist.filter(function(h){return h.at!==S.run.tl});S.run={st:'idle',t0:0,acc:0};save();closeSheet();render();return}
 if(a==='runlog'){runLog();return}
 if(a==='rundel'){S.runs=(S.runs||[]).filter(function(x){return x.id!==id});save();rToday();if(S.runs.length)runLog();else closeSheet();return}
 if(a==='rsmon'){restV=Math.min(0,restV+ +t.dataset.v);rMed();return}if(a==='rsday'){var rd=t.dataset.d,rc=(S.rest||{})[rd];sheet(dayLbl(rd),'<button class="opt" style="background:#A8582F;color:#FFF1E6;border:0" data-a="rsset" data-d="'+rd+'" data-v="i">Insomnia'+(rc==='i'?' \u2713':'')+'</button><button class="opt" style="background:#FFF1E6;color:#5a2408;border:0;margin-top:8px" data-a="rsset" data-d="'+rd+'" data-v="w">Woke up'+(rc==='w'?' \u2713':'')+'</button>'+(rc?'<button class="opt dg" data-a="rsset" data-d="'+rd+'" data-v="">Clear this day</button>':''),null);return}if(a==='rsset'){var Rr=S.rest||(S.rest={});if(t.dataset.v)Rr[t.dataset.d]=t.dataset.v;else delete Rr[t.dataset.d];save();closeSheet();rMed();return}if(a==='tmon'){trkV[t.dataset.k]=Math.min(0,trkV[t.dataset.k]+ +t.dataset.v);rMed();return}
