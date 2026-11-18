@@ -407,6 +407,10 @@ nav button{white-space:nowrap}nav button.on{color:var(--cy);font-weight:600}.dar
 .moodp .firebox h3{color:var(--k)!important}.moodp .firebox .bkrow{background:var(--c)!important;border:2px solid var(--k)!important}.moodp .firebox .bkrow b{color:var(--k)!important}
 .moodp #sheet .mlr,.moodp #sheet .mlr b{color:#dfe9ff!important}.moodp #sheet .mlr{border-top-color:#1b2859!important}.moodp #sheet .mlr small,.moodp #sheet .mlr em{color:#8d9bc8!important}
 .moodp #sheet .jrow .ck,.moodp #sheet .jrow .ck span{color:#dfe9ff!important}.moodp #sheet .jrow .ck small{color:#8d9bc8!important}.moodp #sheet .jrow .ck small.late{color:#ff8a8a!important}.moodp #sheet .jrow i{color:#5fd0ff!important}.moodp #sheet .jrow .x{color:#8d9bc8!important}
+.rwrows{margin-top:10px}.rwrow{display:flex;align-items:center;gap:8px;width:100%;padding:10px 2px;border:0;border-top:1px solid rgba(128,128,128,.28);background:transparent;color:inherit;font:inherit;text-align:left}.rwrows>.rwrow:first-child{border-top:0}
+.rwrow b{flex:0 0 46px;white-space:nowrap;font:800 14px var(--body)}.rwrow em{flex:0 0 50px;text-align:right;font:600 12px var(--body);font-style:normal;opacity:.85}.rwrow strong{flex:0 0 46px;display:flex;align-items:center;justify-content:flex-end;gap:3px;font:800 13px var(--body)}
+.rwbs{flex:1;display:flex;gap:1px;height:28px;min-width:0}.rwb{flex:1;display:flex;align-items:flex-end;background:rgba(128,128,150,.3);border-radius:2px;position:relative}.rwb u{display:block;width:100%;border-radius:2px;text-decoration:none}.rwb.past{opacity:.45}.rwb.now{box-shadow:0 0 0 1.5px currentColor;border-radius:3px;z-index:1}
+.rwrow.sel b::after{content:' \25b4'}.rwdet{padding:0 0 8px}
 .rwdl{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.rwdb{flex:1 1 30%;min-width:88px;padding:9px 10px;border-radius:12px;border:0;text-align:left;line-height:1.25;font-family:var(--body)}.rwdb b{display:block;font:800 13px var(--body)}.rwdb span{display:block;font:600 11px var(--body);margin-top:1px}.rwdb.sel{box-shadow:0 0 0 2px #fff,0 0 0 4px #14141f}.moodp .rwdb.sel{box-shadow:0 0 0 2px var(--c),0 0 0 4px var(--k)!important}.rwdl+.rwl{margin-top:12px}
 .twsp{display:flex;align-items:center;gap:8px}.twsp input{min-width:0;flex:1}.twsp input#twtot{flex:0 0 34%}.twsp span{font:800 18px var(--body);opacity:.6}
 .moodp .rwc button{border-color:var(--k)!important;color:var(--k)!important;background:transparent!important}.moodp .rwc button.on{background:var(--k)!important;color:var(--a)!important}.moodp .rwr{border:0}
@@ -832,20 +836,20 @@ var rwSel='';
 function rwIsR(x){return x.p>=30||x.mm>=0.2}
 function rwDow(d){return d===ymd(0)?'Today':new Date(d+'T12:00:00').toLocaleDateString([],{weekday:'short'})}
 function rwDays(c){var td=ymd(0),nh=new Date().getHours(),m={},o=[];c.h.forEach(function(x){if(x.d<td||(x.d===td&&x.h<nh)||!rwIsR(x))return;if(!m[x.d]){m[x.d]=[];o.push(x.d)}m[x.d].push(x)});return o.map(function(d){return{d:d,h:m[d]}})}
+var RWB=['#8cc4f0','#58b4ea','#3f6fc0','#0b1f66'];
+function rwMm(v){return v<0.05?'0':(v<10?(Math.round(v*10)/10)+'':Math.round(v)+'')}
+function rwRow(o,c,td,nh,sel){var hrs=c.h.filter(function(x){return x.d===o.d}),tot=0,pk=0;hrs.forEach(function(x){tot+=x.mm;pk=Math.max(pk,x.p)});
+var bars=hrs.map(function(x){var f=x.mm<=0?0:Math.max(.14,Math.min(1,x.mm/4)),cl=RWB[x.mm<0.1?0:x.mm<2.5?1:x.mm<7.6?2:3],now=x.d===td&&x.h===nh,past=x.d===td&&x.h<nh;return'<i class="rwb'+(now?' now':'')+(past?' past':'')+'"><u style="height:'+Math.round(f*100)+'%;background:'+cl+'"></u></i>'}).join('');
+return'<button class="rwrow'+(sel?' sel':'')+'" data-a="rwday" data-d="'+o.d+'"><b>'+rwDow(o.d)+'</b><span class="rwbs">'+bars+'</span><em>'+rwMm(tot)+' mm</em><strong><svg viewBox="0 0 10 14" width="9" height="12"><path d="M5 0C5 0 0 6 0 9a5 5 0 0010 0C10 6 5 0 5 0z" fill="#3f9be0"/></svg>'+pk+'%</strong></button>'}
 function rainHtml(){var l=rwLoc();rwFetch(l);var c=rwData[l[0]],td=ymd(0),nh=new Date().getHours(),body;
 if(!c)body='<div class="none">Checking the sky\u2026</div>';
 else if(c.err)body='<div class="none">Couldn\u2019t load the forecast ('+esc(c.err)+').</div>';
-else{var hs=c.h.filter(function(x){return x.d===td&&x.h>=nh}),dys=rwDays(c);
-var stl=c.stale?'<div class="rwn">Offline \u00b7 showing forecast saved at '+new Date(c.stale).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+(c.why?' ('+esc(c.why)+')':'')+'</div>':'';body='';
-var soon=hs.filter(function(x){return rwIsR(x)&&x.h<nh+3}).length>0;
-if(hs.length)body+='<div class="rws">'+(soon?'Rain possible soon':'Rain not possible soon')+'</div>';
-var nx=dys.length?dys[0].h[0]:null;if(nx&&!soon)body+='<div class="rwn">Next chance: '+(nx.d===td?'':rwDow(nx.d)+' ')+rwH(nx.h)+'</div>';
-body+=stl;
+else{var dys=rwDays(c);
+body=c.stale?'<div class="rwn">Offline \u00b7 showing forecast saved at '+new Date(c.stale).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+(c.why?' ('+esc(c.why)+')':'')+'</div>':'';
 if(c.stale&&!c.h.some(function(x){return x.d>td}))body+='<div class="rwn" style="margin-top:8px">Couldn\u2019t refresh the 7-day forecast \u2014 showing today only.</div>';
 else if(!dys.length)body+='<div class="rwn" style="margin-top:8px">No rain expected in the next 7 days.</div>';
-else{body+='<div class="rwdl">'+dys.map(function(o){var mx=0,pk=0;o.h.forEach(function(x){mx=Math.max(mx,x.mm);pk=Math.max(pk,x.p)});var k=rwK(mx),sel=o.d===rwSel;return'<button class="rwdb'+(sel?' sel':'')+'" data-a="rwday" data-d="'+o.d+'" style="background:'+k[1]+'!important;color:'+k[2]+'!important;-webkit-text-fill-color:'+k[2]+'!important"><b>'+rwDow(o.d)+(sel?' \u25b4':' \u25be')+'</b><span>'+o.h.length+(o.h.length===1?' hr':' hrs')+' \u00b7 up to '+pk+'%</span></button>'}).join('')+'</div>';
-var sd=dys.filter(function(o){return o.d===rwSel})[0];
-if(sd)body+='<div class="rwl">'+RWK.map(function(k){return'<span><i style="background:'+k[1]+'"></i>'+k[0]+'</span>'}).join('')+'</div><div class="rwh">'+new Date(sd.d+'T12:00:00').toLocaleDateString([],{weekday:'long'})+' \u00b7 color = how hard it rains \u00b7 % = chance of rain</div>'+sd.h.map(function(r){var k=rwK(r.mm);return'<div class="rwr" style="background:'+k[1]+'"><b style="color:'+k[2]+'!important">'+rwH(r.h)+'</b><span style="color:'+k[2]+'!important;opacity:1">'+r.p+'% chance \u00b7 '+k[0]+'</span></div>'}).join('')}}
+else{body+='<div class="rwrows">'+dys.map(function(o){var h=rwRow(o,c,td,nh,o.d===rwSel);if(o.d!==rwSel)return h;
+return h+'<div class="rwdet"><div class="rwl">'+RWK.map(function(k){return'<span><i style="background:'+k[1]+'"></i>'+k[0]+'</span>'}).join('')+'</div>'+o.h.map(function(r){var k=rwK(r.mm);return'<div class="rwr" style="background:'+k[1]+'"><b style="color:'+k[2]+'!important">'+rwH(r.h)+'</b><span style="color:'+k[2]+'!important;opacity:1">'+r.p+'% chance \u00b7 '+k[0]+'</span></div>'}).join('')+'</div>'}).join('')+'</div>'}}
 if(c)body+='<button class="tg rwt" data-a="rwretry">\u21bb '+(c.err||c.stale?'Retry':'Refresh')+'</button>';
 return'<div class="sec slim" style="margin-top:14px;border-top:0!important"><h3>RAIN WATCH</h3></div><div class="card rw"><div class="rwc">'+RWL.map(function(x){return'<button class="'+(x[0]===l[0]?'on':'')+'" data-a="rwl" data-k="'+x[0]+'">'+x[1]+'</button>'}).join('')+'</div>'+body+'</div>'}
 function ofHtml(){var l=ofList();if(!l.length)return'';return'<div class="sec slim" style="margin-top:14px"><h3>INSPIRATION</h3></div><div class="card" style="padding:6px 12px">'+l.map(function(e,i){return'<div class="jrow"><button class="ck" data-a="ofdo" data-i="'+i+'"><i></i><span>'+esc(e.t)+'<small>+1 '+e.stat+'<em style="font-style:normal;font-size:11px;opacity:.6;margin-left:8px">'+(e.n?e.n+'× in 30 days':'from your list')+'</em></small></span></button></div>'}).join('')+'</div>'}
