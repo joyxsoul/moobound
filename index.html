@@ -842,6 +842,11 @@ nav button{font-size:11px;padding-left:2px;padding-right:2px;white-space:nowrap}
 .pnsi.pal-w{background:linear-gradient(135deg,#fff 0 55%,#2a1f4d 55% 78%,#B9A7F5 78%)}
 .phone.pal-w{--b1:#FFFFFF;--b2:#FAF8FF;--b3:#F1ECFC;--k:#2a1f4d;--a:#B9A7F5;--c:#fff;--m:#6a5aa8;--ln:#e6dff8;--tr:#eee9fa;--t:#2a1f4d;--ts:#fff;--st:#4a3d80}
 .phone.pal-w #shadows .sec h3,.phone.pal-w #shadows .sec h3 *{color:#2a1f4d!important}.phone.pal-w #shadows .pill,.phone.pal-w #shadows .sec button{color:#2a1f4d!important;border-color:#2a1f4d!important;background:#fff!important}.phone.pal-w nav button{color:#cfc6ee}.phone.pal-w nav button.on{color:#fff}
+.mpair.mpv{align-items:stretch}.mpair.mpv .mcard{padding:8px 4px 10px}.mpair.mpv .mmid{flex:1.5;background:#FFC350!important;box-shadow:0 3px 0 #c98a00!important;border:0;cursor:pointer;font:inherit;color:#490007}
+.mpair.mpv .mmid .ml,.mpair.mpv .mmid .mnum{color:#490007!important}.mpair.mpv .mmid .mnum{font-size:38px}.mpair.mpv .mmid:active{transform:translateY(2px);box-shadow:0 1px 0 #c98a00!important}
+.moodp .mpair.mpv .mmid{border:2px solid var(--k)!important;box-shadow:3px 3px 0 var(--k)!important}
+.mchips.mtd{margin-top:8px}
+.mpair.mpv+.mtwo{margin-top:10px}
 </style>
 </head>
 <body>
@@ -1046,7 +1051,7 @@ var y=moodV.y,mo=moodV.m,first=new Date(y,mo,1),dim=new Date(y,mo+1,0).getDate()
 for(var d=1;d<=dim;d++)if((D[pre+pad(d)]||[]).length)days++;
 var h='<div class="pnh"><div><div class="disp title">Mood</div><div class="sub">How are you feeling?</div></div></div><div class="mchips">'+MOODS.map(function(m){return'<button class="mchip" data-a="mpick" data-k="'+m[0]+'"><i style="background:'+m[2]+'"></i>'+m[1]+'</button>'}).join('')+'</div>';
 var tl=(D[td]||[]).slice().sort(function(a,b){return a.t-b.t});
-h+='<div class="sec slim" style="margin-top:18px"><h3>TODAY</h3></div>'+(tl.length?'<div class="mlogc">'+tl.map(function(e){var m=mInfo(e.k);return'<button class="mlr" data-a="medit" data-d="'+td+'" data-id="'+e.id+'"><div class="h"><i style="background:'+m[2]+'"></i><b>'+m[1]+'</b></div>'+(mWhy(e).length?'<small>'+esc(mWhy(e).join(' \u00b7 '))+'</small>':'')+'</button>'}).join('')+'</div>':'<div class="none" style="margin-top:8px">Nothing logged yet. Tap a mood above.</div>');
+h+='<div class="sec slim" style="margin-top:18px"><h3>TODAY</h3></div>'+(tl.length?'<div class="mchips mtd">'+tl.map(function(e){var m=mInfo(e.k);return'<button class="mchip" data-a="medit" data-d="'+td+'" data-id="'+e.id+'"><i style="background:'+m[2]+'"></i>'+m[1]+'</button>'}).join('')+'</div>':'<div class="none" style="margin-top:8px">Nothing logged yet. Tap a mood above.</div>');
 h+='<div class="mcard mcal dmood" style="margin-top:16px"><div class="mmh"><button class="mnav" data-a="moprev" aria-label="Previous month">‹</button><div><span class="ml">'+first.toLocaleDateString([],{month:'long',year:'numeric'})+'</span><b class="mdays">'+days+(days===1?' day':' days')+' logged</b></div><button class="mnav" data-a="monext"'+(cur?' disabled':'')+' aria-label="Next month">›</button></div><div class="mgrid">'+['S','M','T','W','T','F','S'].map(function(x){return'<i class="mw">'+x+'</i>'}).join('');
 for(var i=0;i<off;i++)h+='<i></i>';
 for(var d=1;d<=dim;d++){var k=pre+pad(d),l=D[k]||[],st='';if(l.length){var av=mAvg(l);st=' style="background:'+av.bg+';color:'+av.fg+'"'}h+='<button class="md'+(k===td?' tdy':'')+'" data-a="moday" data-d="'+k+'"'+st+'>'+d+'</button>'}
@@ -1284,8 +1289,7 @@ function medFmt(t){t=Math.max(0,Math.round(t));return Math.floor(t/60)+':'+pad(t
 function medRem(){return S.med.end?Math.max(0,Math.ceil((S.med.end-Date.now())/1000)):0}
 function rMed(){var m=S.med,run=!!m.end,ps=!!m.pz,busy=run||ps;
 $('med').innerHTML='<div class="disp title">Invigorate</div><div class="sub">Hold the stillness</div>'+
-'<div class="mcard"><span class="ml">Countdown</span><div id="medT" class="disp mbig">'+medFmt(run?medRem():ps?Math.ceil(m.pz/1000):m.len)+'</div>'+(busy?'<div class="mtwo"><button class="mbtn alt" data-a="mstop">Rest</button><button class="mbtn" data-a="'+(run?'mpause':'mresume')+'">'+(run?'Pause':'Resume')+'</button></div>':'<button class="mbtn" data-a="mstart">Level Up</button>')+'</div>'+
-'<div class="mpair"><div class="mcard"><span class="ml">Completed</span><b class="mnum">'+m.n+'</b></div><div class="mcard"><span class="ml">Longest</span><b class="mnum">'+(m.best?medFmt(m.best):'\u2014')+'</b></div></div>'+
+'<div class="mpair mpv"><div class="mcard"><span class="ml">Completed</span><b class="mnum">'+m.n+'</b></div><button class="mcard mmid" data-a="'+(busy?(run?'mpause':'mresume'):'mstart')+'"><span class="ml">'+(busy?(run?'Tap to pause':'Paused \u00b7 tap to resume'):'Tap to level up')+'</span><b id="medT" class="mnum">'+medFmt(run?medRem():ps?Math.ceil(m.pz/1000):m.len)+'</b></button><div class="mcard"><span class="ml">Longest</span><b class="mnum">'+(m.best?medFmt(m.best):'\u2014')+'</b></div></div>'+(busy?'<div class="mtwo"><button class="mbtn alt" data-a="mstop">Rest</button></div>':'')+
 '<div class="mtwo madj"><button class="mbtn alt" data-a="mless"'+(busy?' disabled':'')+'>\u221230 sec</button><button class="mbtn" data-a="madd"'+(busy?' disabled':'')+'>+30 sec to longest</button></div><div class="mhint">Next countdown: '+medFmt(m.len)+'</div>'+medCal()+trkCal('gr')+trkCal('ns')+restCal()+dietH+probHtml()+joyHtml()+shopHtml()}
 
 /* Invigorate chime (synthesized bell, scheduled with Web Audio so it still fires if timers are throttled) */
