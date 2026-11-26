@@ -931,10 +931,10 @@ h+='<div class="slot'+(s.k==='dark'?' night':'')+(s.k===curSlot()?' now':'')+'">
 var gh=S.rec.filter(function(r){return r.slot===s.k&&r.on!==ymd(0)}).sort(function(a,b){return String(a.t).localeCompare(String(b.t),undefined,{sensitivity:'base'})});h+=gh.map(function(r){return'<button class="task ghost" data-a="recon" data-id="'+r.id+'"><span>'+esc(r.t)+'</span><em>'+r.stat.toUpperCase()+'</em></button>'}).join('');
 h+=ts.length?ts.map(function(t){return'<button class="task'+(t.done?' done':'')+'" data-a="task" data-id="'+t.id+'"><span>'+esc(t.t)+'</span><em>'+(t.done?'+1 ':'')+t.stat.toUpperCase()+'</em></button>'}).join(''):(gh.length?'':'<div class="none">Nothing planned</div>');
 h+='</div></div>'});
-var hTT=h;h=hM1;h+=runHtml();h+=wkHtml();h+=swHtml();h+=vstHtml();h+=fusHtml();var hOF=ofHtml();
+var hTT=h;h=hM1;h+=runHtml();h+=wkHtml();h+=swHtml();h+=fusHtml();var hOF=ofHtml();
 if(!TDHIDE)h+='<div class="btnrow"><button class="addop" data-a="glopen">Compendium</button></div>';
 var hM2=h;h='';h+=sqHtml();
-var hRest=h;h=hM1+hTT+hRest+hM2.slice(hM1.length);
+var hRest=h;h=hM1+vstHtml()+hTT+hRest+hM2.slice(hM1.length);
 $('today').innerHTML=h}
 
 var TDHIDE=true,tdArch=false,qdT='',qdS='Knowledge',qdOpen=false,stOpen=false,sqOpen=false;
