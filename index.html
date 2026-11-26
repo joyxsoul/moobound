@@ -686,6 +686,24 @@ nav button{font-size:10.5px!important;letter-spacing:-.02em!important}
 .sqit{margin:12px 2px 6px;font:700 10px var(--body);letter-spacing:.12em;color:#6c7aa8}
 .moodp .sqb{background:var(--c)!important;border:2px solid var(--k)!important;color:var(--k)!important;box-shadow:2px 2px 0 var(--k)}
 .moodp .sqbt small,.moodp .sqbx{color:var(--m)!important}.moodp .sqbc,.moodp .sqp{border-color:var(--k);color:var(--k)}.moodp .sqit{color:var(--k)}
+
+/* slimmer Upkeep */
+.vsm{margin-top:10px;padding:9px 10px 8px}
+.vsm .hmt{font-size:16px}.vsm .hmk{font-size:9px}
+.vstr{margin-top:5px;gap:6px}
+.vstn{padding:5px 8px;gap:8px;border-radius:10px}
+.vstn b{font-size:13px}.vstn small{font-size:10px;margin-top:0}
+.vstd{min-height:34px;padding:0 11px;font-size:12px;border-radius:10px}
+.vsta{margin-top:6px;min-height:32px;font-size:12px}
+.vstno{margin-top:6px;font-size:12px}
+/* slimmer Overdrive */
+.swg{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:8px;align-items:center;margin-top:8px;padding:8px 10px;border-radius:12px}
+.swg>.swtt{grid-column:1/-1;font-size:12px;line-height:1.1}
+.swg .swp{grid-column:1;margin-top:4px;padding:5px 2px 4px;border-radius:10px}
+.swg .swp b{font-size:24px}.swg .swp small{font-size:7px;margin-top:2px;letter-spacing:.1em}.swg .swp span{font-size:16px;margin-top:2px}
+.swg>.swst{grid-column:1/-1;margin-top:3px;font-size:10px}
+.swg>.swbt{grid-column:2;grid-row:2;margin-top:4px;flex-direction:column;gap:5px}
+.swg .swbt button{min-height:30px;padding:0 12px;font-size:11px;border-radius:8px}
 </style>
 </head>
 <body>
@@ -968,7 +986,7 @@ var tt={};S.hist.forEach(function(x){tt[x.name]=(tt[x.name]||0)+x.ms});
 as.filter(function(a){return!a.arch}).sort(function(a,b){return((tt[b.name]||0)+el(b))-((tt[a.name]||0)+el(a))}).forEach(function(a){var st=status(a);
 h+='<div class="card arow'+(st==='run'?' run':'')+'"><div class="an"'+(archSel?'':' data-a="aren" data-id="'+a.id+'" style="cursor:pointer"')+'><b>'+esc(a.name)+'</b></div>'+(st!=='idle'?'<span class="tm" data-id="'+a.id+'">'+fmt(el(a))+'</span>':'')+(archSel?(st==='idle'?'<button class="pk'+(archPick.indexOf(a.id)>=0?' on':'')+'" data-a="apick" data-id="'+a.id+'" aria-label="Select '+esc(a.name)+'">'+(archPick.indexOf(a.id)>=0?'✓':'')+'</button>':''):(st!=='idle'?'<button class="mb" data-a="end" data-id="'+a.id+'" aria-label="End session">End</button>':'')+'<button class="mb p" data-a="'+(st==='run'?'pause':'start')+'" data-id="'+a.id+'">'+(st==='run'?'Pause':st==='pause'?'Resume':'Evoke')+'</button>')+'</div>'+(!archSel&&/doom/i.test(a.name)?'<div class="qlg" aria-label="Quick log, ended now">'+[5,10,20].map(function(m){return'<button data-a="qlog" data-id="'+a.id+'" data-k="'+m+'">'+m+' min</button>'}).join('')+'</div>':'')});
 h+=dkH('TIME BY FOCUS FLOOR','t')+(!S.dkt?'':(Object.keys(tt).length?Object.keys(tt).sort(function(a,b){return tt[b]-tt[a]}).map(function(k){return'<div class="trow"><span>'+esc(k)+'</span><b>'+fmtDH(tt[k])+'</b></div>'}).join(''):'<p class="none">No sessions yet</p>'));
-var td={};today().forEach(function(x){td[x.name]=(td[x.name]||0)+x.ms});var tk=Object.keys(td).sort(function(a,b){return td[b]-td[a]});h+=dkH('TRACKED TODAY','d')+(!S.dkd?'':(tk.length?tk.map(function(k){return'<div class="trow" data-a="hsess" data-n="'+esc(k)+'" style="cursor:pointer"><span>'+esc(k)+'</span><b>'+fmtH(td[k])+' \u203a</b></div>'}).join('')+'<div class="trow"><span>Total</span><b>'+fmtH(tk.reduce(function(t,k){return t+td[k]},0))+'</b></div>'+dhPie(td,tk):'<p class="none">Nothing tracked today yet</p>'));
+var td={};today().forEach(function(x){td[x.name]=(td[x.name]||0)+x.ms});var tk=Object.keys(td).sort(function(a,b){return td[b]-td[a]});h+=dkH('TRACKED TODAY','d')+(!S.dkd?'':(tk.length?tk.map(function(k){return'<div class="trow" data-a="hsess" data-n="'+esc(k)+'" style="cursor:pointer"><span>'+esc(k)+'</span><b>'+fmtH(td[k])+' \u203a</b></div>'}).join(''):'<p class="none">Nothing tracked today yet</p>'));
 var ar=S.acts.filter(function(a){return a.arch});if(ar.length){h+='<button class="link" style="color:#8fb7a3" data-a="tarchA">'+(showArchA?'Hide':'Show')+' archived ('+ar.length+')</button>';if(showArchA)h+=ar.map(function(a){return'<div class="card arow" style="opacity:.75"><div class="an"><b>'+esc(a.name)+'</b></div><button class="mb p" data-a="aunarch" data-id="'+a.id+'">Unarchive</button></div>'}).join('')}
 h+=archSel?'<div class="savebar"><button class="routine" data-a="adoarch"'+(archPick.length?'':' disabled style="opacity:.5"')+'>'+(archPick.length?'Save · archive '+archPick.length+(archPick.length==1?' Focus Floor':' Focus Floors'):'Tick Focus Floors to archive')+'</button></div>':'<button class="routine" data-a="fab">Focus Floor</button>';
 return h+'</div>'}
