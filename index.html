@@ -659,6 +659,33 @@ nav button{font-size:10.5px!important;letter-spacing:-.02em!important}
 .wkm .wkn{display:block;text-align:center}
 .wkd.fut{opacity:.55}
 .mqx{position:absolute;top:8px;right:10px}
+
+/* Shadows: boxed sections */
+.sdwbox{margin-top:18px;padding:2px 12px 14px;border-radius:16px;border:2px solid var(--bx,#5ff2d6);background:var(--bgx,rgba(95,242,214,.05))}
+.sdwbox .sdwsec{margin-top:8px}
+.sdwbox.bt{--bx:#ffb347;--bgx:rgba(255,179,71,.09);box-shadow:0 0 18px rgba(255,179,71,.12)}
+.sdwbox.bt .sdwsec{color:#ffc978;text-shadow:0 0 10px rgba(255,179,71,.45)}
+.sdwbox.wr{--bx:#b99cf0;--bgx:rgba(185,156,240,.08)}
+.sdwbox.wr .sdwsec{color:#d3bdff;text-shadow:0 0 10px rgba(179,136,255,.45)}
+.sdwbox .sdwcap{margin:10px 0 -4px}
+.moodp #shadows .sdwbox{background:rgba(255,255,255,.22)!important;border:2px solid var(--k)!important}
+.moodp #shadows .sdwbox.bt{border-width:3px!important;box-shadow:4px 4px 0 var(--k)}
+/* Today: small side-by-side Side Quest buttons */
+#today .sec.sqh{margin:12px 0 0;padding:12px 2px 8px}
+.sqg{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:2px}
+.sqb{display:flex;align-items:center;gap:7px;min-width:0;min-height:42px;padding:6px 8px;border-radius:12px;background:var(--card);border:1px solid #2b3b7a;color:var(--tx);font:inherit;text-align:left}
+.sqbc{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid #5fd0ff;background:none;padding:0}
+.sqb.wait{opacity:.65}.sqb.wait .sqbc{border-color:#5a6b9a}
+.sqbt{flex:1;min-width:0}
+.sqbt b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font:600 12px/1.2 var(--body)}
+.sqbt small{display:block;font:500 10px var(--body);color:var(--mu);margin-top:2px}
+.sqbt small.late{color:#ff8a8a}
+.sqbx{flex:none;padding:2px;font-size:14px;line-height:1;background:none;border:0;color:var(--mu);cursor:pointer}
+.sqadd{justify-content:center;border-style:dashed;color:var(--mu);font:600 12px var(--body);cursor:pointer}
+.sqi{opacity:.8;cursor:pointer}.sqp{flex:none;font-style:normal;color:#5fd0ff;font-size:16px;line-height:1}
+.sqit{margin:12px 2px 6px;font:700 10px var(--body);letter-spacing:.12em;color:#6c7aa8}
+.moodp .sqb{background:var(--c)!important;border:2px solid var(--k)!important;color:var(--k)!important;box-shadow:2px 2px 0 var(--k)}
+.moodp .sqbt small,.moodp .sqbx{color:var(--m)!important}.moodp .sqbc,.moodp .sqp{border-color:var(--k);color:var(--k)}.moodp .sqit{color:var(--k)}
 </style>
 </head>
 <body>
@@ -795,8 +822,8 @@ return h+'</div>'}
 function rShadows(){var el=$('shadows');if(!el)return;var S2=S.sh||(S.sh={e:[],b:[],nx:1}),E=S2.e.filter(function(x){return!x.ar}).sort(function(a,b){return b.at.localeCompare(a.at)||b.n-a.n}),B=S2.b.filter(function(x){return!x.ar}).sort(function(a,b){return sdBSince(b)-sdBSince(a)}),AE=S2.e.filter(function(x){return x.ar}),AB=S2.b.filter(function(x){return x.ar}),open=E.filter(function(x){return!(x.rf||[]).length}).length,refl=E.length-open,due=E.filter(function(x){return sdDays(sdLast(x))>=30}).length;
 var h='<div class="pnh"><div><div class="disp title sdwti">Shadows</div><div class="sub">Tartarus \u00b7 Shadow Block</div></div></div><div class="sdwq"><i class="sdwor"></i><div class="sdwqt">“It’ll be a shame to go on a day without being happy.”</div></div>';
 h+='<div class="sdwsm"><div><b>'+open+'</b><span>Unfaced</span></div><div><b>'+refl+'</b><span>Reflected</span></div><div class="'+(due?'hot':'')+'"><b>'+due+'</b><span>To revisit</span></div></div>';
-h+='<button class="sdwsec" data-a="sdtitle" data-k="b">'+esc(sdTl('b'))+'</button>'+(B.length?'<div class="sdwtw">'+B.map(sdBattle).join('')+'</div>':'<div class="none">No habits logged yet.</div>')+'<button class="addop" data-a="sdbnew">+ Clashed</button><button class="sdwcap" data-a="sdtitle" data-k="c">'+esc(sdTl('c'))+'</button>';
-h+='<button class="sdwsec" data-a="sdtitle" data-k="w">'+esc(sdTl('w'))+'</button>'+(E.length?E.map(sdEntry).join(''):'<div class="none">Nothing here yet. Write a worry down so you can look back on it later.</div>')+'<button class="addop" data-a="sdnew">+ New Shadow</button>';
+h+='<div class="sdwbox bt"><button class="sdwsec" data-a="sdtitle" data-k="b">'+esc(sdTl('b'))+'</button>'+(B.length?'<div class="sdwtw">'+B.map(sdBattle).join('')+'</div>':'<div class="none">No habits logged yet.</div>')+'<button class="addop" data-a="sdbnew">+ Clashed</button><button class="sdwcap" data-a="sdtitle" data-k="c">'+esc(sdTl('c'))+'</button></div>';
+h+='<div class="sdwbox wr"><button class="sdwsec" data-a="sdtitle" data-k="w">'+esc(sdTl('w'))+'</button>'+(E.length?E.map(sdEntry).join(''):'<div class="none">Nothing here yet. Write a worry down so you can look back on it later.</div>')+'<button class="addop" data-a="sdnew">+ New Shadow</button></div>';
 if(AE.length||AB.length){h+='<button class="tg" style="padding:18px 0 0" data-a="sdatog">Archived ('+(AE.length+AB.length)+') '+(sdArc?'▴':'▾')+'</button>';if(sdArc){h+=AB.map(function(b){return'<div class="sdwar"><span><small>Habit · '+sdPl(sdBSince(b),'day')+' since</small><b>'+esc(b.n)+'</b></span><button data-a="sdbun" data-id="'+b.id+'">Restore</button><button data-a="sdbdel" data-id="'+b.id+'">Delete</button></div>'}).join('')+AE.map(function(e){return'<div class="sdwar"><span><small>Entry '+e.n+' · '+fd(e.at)+'</small><b>'+esc(e.ti||(e.t||'').slice(0,40)||'Untitled')+'</b></span><button data-a="sdun" data-id="'+e.id+'">Restore</button><button data-a="sddel" data-id="'+e.id+'">Delete</button></div>'}).join('')}}
 h+=dkHtml();el.innerHTML=h}
 function sdEntrySheet(e){var n=!e;e=e||{ti:'',t:'',at:ymd(0)};sheet(n?'New Shadow':'Edit Entry '+e.n,'<label for="sdti" style="margin-top:0">Title (optional)</label><input id="sdti" maxlength="60" placeholder="What is it about?" value="'+esc(e.ti||'')+'"><label for="sdd">Date</label><input id="sdd" type="date" max="'+ymd(0)+'" value="'+e.at+'"><label for="sdx">Thoughts</label><textarea id="sdx" rows="7" placeholder="What’s weighing on you?">'+esc(e.t||'')+'</textarea><div id="sde" class="lab" style="color:#ff8a8a;margin-top:6px"></div>'+(n?'':'<button class="opt dg" data-a="sddelq" data-id="'+e.id+'">Delete entry</button>'),'Save',function(){var t=$('sdx').value.trim(),ti=$('sdti').value.trim(),d=$('sdd').value||ymd(0);if(!t&&!ti){$('sde').textContent='Write something first.';return false}if(n){var q=S.sh;q.e.push({id:pnId(),n:q.nx++,at:d,ti:ti,t:t,rf:[],ar:false})}else{e.ti=ti;e.t=t;e.at=d}save()})}
@@ -906,9 +933,7 @@ h+=ts.length?ts.map(function(t){return'<button class="task'+(t.done?' done':'')+
 h+='</div></div>'});
 var hTT=h;h=hM1;h+=runHtml();h+=wkHtml();h+=swHtml();h+=vstHtml();h+=fusHtml();var hOF=ofHtml();
 if(!TDHIDE)h+='<div class="btnrow"><button class="addop" data-a="glopen">Compendium</button></div>';
-var hM2=h;h='';h+=sqHtml();var mo=S.mp[ym()]||{};h+='<div class="sec slim" style="margin-top:22px"><h3>SOCIAL STATS</h3><button class="tg" data-a="sttog">'+(stOpen?'Hide \u25b4':'Show \u25be')+'</button></div>';if(stOpen)h+='<div class="stats" style="margin-top:8px">'+STATS.map(function(k){return'<div data-a="pillar" data-id="'+k+'" style="cursor:pointer">'+k+'<small style="display:block;margin-top:4px">'+(mo[k]||0)+' pts</small></div>'}).join('')+'</div>';
-
-
+var hM2=h;h='';h+=sqHtml();
 var hRest=h;h=hM1+hTT+hRest+hM2.slice(hM1.length);
 $('today').innerHTML=h}
 
@@ -1176,11 +1201,11 @@ function sqLast(x){var b=x.last||0,tl=x.t.toLowerCase();(S.pl||[]).forEach(funct
 function sqSince(ts){var a=new Date(ts),b=new Date(),n=Math.round((new Date(b.getFullYear(),b.getMonth(),b.getDate())-new Date(a.getFullYear(),a.getMonth(),a.getDate()))/864e5);return n<=0?'done today':n+(n===1?' day':' days')+' since'}
 var SQN={'':'Once',d:'Daily',w:'Weekly',m:'Monthly'};
 function sqHtml(){var q=S.sq.slice().sort(function(a,b){return a.due<b.due?-1:a.due>b.due?1:0});
-var hd='<div class="sec slim"'+(stOpen?' style="margin-top:22px"':'')+'><h3>SIDE QUEST</h3></div>';
+var hd='<div class="sec slim sqh"><h3>SIDE QUEST</h3></div>';
 var have=q.map(function(x){return x.t.toLowerCase()}),ideas=(S.sqa||[]).filter(function(a){return have.indexOf(a.t.toLowerCase())<0}).slice(0,3);
-var rq='<button class="ck" data-a="sqnew" style="opacity:.55;padding:9px 2px;'+(q.length?'border-top:1px dashed #34437f;margin-top:4px':'')+'"><i style="border-radius:50%;display:flex;align-items:center;justify-content:center;font-style:normal;line-height:1;color:#5fd0ff;border-color:#5fd0ff;background:none;font-size:15px">+</i><span style="color:#8d9bc8">Request a side quest</span></button>';
-var body='<div class="card sqc">'+q.map(function(x){var an=!x.due,n=an?0:dd(x.due),now=n<=0;return'<div class="jrow"><button class="ck'+(now?'':' grey')+'" style="cursor:default"><i data-a="'+(now?'sqdone':'sqwait')+'" data-id="'+x.id+'" style="cursor:pointer"></i><span>'+esc(x.t)+'<small class="'+(!an&&n<0?'late':'')+'">+'+x.pts+' '+x.stat+(sqLast(x)?'<em style="font-style:normal;font-size:11px;opacity:.6;margin-left:8px">'+sqSince(sqLast(x))+'</em>':'')+'</small></span></button><button class="x" data-a="sqedit" data-id="'+x.id+'" aria-label="Edit">⋯</button></div>'}).join('')+rq+'</div>';
-var id2=ideas.length?'<div style="margin:14px 2px 2px;font-size:10px;letter-spacing:.12em;color:#4d5a85">IDEAS FROM YOUR ARCHIVE</div>'+ideas.map(function(a){return'<button class="ck" data-a="sqidea" data-id="'+a.id+'" style="opacity:.4;padding:6px 2px"><i></i><span>'+esc(a.t)+'<small>+'+a.pts+' '+a.stat+' · tap to add</small></span></button>'}).join(''):'';
+var chips=q.map(function(x){var an=!x.due,n=an?0:dd(x.due),now=n<=0,sl=sqLast(x);return'<div class="sqb'+(now?'':' wait')+'" title="'+(sl?sqSince(sl):'')+'"><button class="sqbc" data-a="'+(now?'sqdone':'sqwait')+'" data-id="'+x.id+'" aria-label="'+(now?'Complete':'Not due yet')+'"></button><span class="sqbt"><b>'+esc(x.t)+'</b><small class="'+(!an&&n<0?'late':'')+'">+'+x.pts+' '+x.stat+'</small></span><button class="sqbx" data-a="sqedit" data-id="'+x.id+'" aria-label="Edit">\u22ef</button></div>'}).join('');
+var body='<div class="sqg">'+chips+'<button class="sqb sqadd" data-a="sqnew">+ Request</button></div>';
+var id2=ideas.length?'<div class="sqit">IDEAS FROM YOUR ARCHIVE</div><div class="sqg">'+ideas.map(function(a){return'<button class="sqb sqi" data-a="sqidea" data-id="'+a.id+'" title="Tap to add"><span class="sqbt"><b>'+esc(a.t)+'</b><small>+'+a.pts+' '+a.stat+'</small></span><i class="sqp">+</i></button>'}).join('')+'</div>':'';
 return hd+body+id2}
 var sqDraft=null;
 function sqArch(){return'<span class="lab">Archive</span>'+(S.sqa.length?S.sqa.map(function(a){return'<div class="jrow"><button class="ck" data-a="sqpick" data-id="'+a.id+'"><i></i><span>'+esc(a.t)+'<small>+'+a.pts+' '+a.stat+' \u00b7 '+SQN[a.rep]+'</small></span></button><button class="x" data-a="sqadel" data-id="'+a.id+'" aria-label="Delete from archive">\u00d7</button></div>'}).join(''):'<div class="none">Past requests are kept here to reuse.</div>')}
