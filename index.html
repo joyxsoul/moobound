@@ -317,7 +317,7 @@ nav button{padding:2px 1px!important;font-size:11px!important;letter-spacing:-.0
 .wkl{display:block;font:700 11px var(--body);letter-spacing:.2em;text-transform:uppercase;color:#8fb6e8}.wkt{display:block;font:italic 900 18px var(--body);color:#eaf3ff}
 .wkbar{display:flex;gap:2px;height:7px;margin-top:10px;border-radius:99px;overflow:hidden}.wkbar i{display:block;min-width:4px}
 .wkg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px 2px;margin-top:10px}.wkw{font:700 10px var(--body);letter-spacing:.12em;color:#6f8ab8;text-align:center;font-style:normal}
-.wkd{min-height:58px;padding:5px 1px 3px;border-radius:10px;border:1px solid transparent;background:rgba(90,200,255,.06);color:#c9dcff;display:flex;flex-direction:column;align-items:center;gap:3px;font:inherit;cursor:pointer}.wkd b{font:700 12px var(--body)}.wkd:active{transform:scale(.94)}
+.wkd{min-height:44px;padding:5px 1px 3px;border-radius:10px;border:1px solid transparent;background:rgba(90,200,255,.06);color:#c9dcff;display:flex;flex-direction:column;align-items:center;gap:3px;font:inherit;cursor:pointer}.wkd b{font:700 12px var(--body)}.wkd:active{transform:scale(.94)}
 .wkd.has{background:rgba(90,200,255,.13);border-color:rgba(90,200,255,.3)}
 .wkdots{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:0;max-width:100%;padding:0 3px}.wkdots .wkdot{opacity:.85;margin:0 -2.5px;position:relative}.wkdots .wkdot:nth-child(even){transform:translateY(3px)}.wkdots .wkdot:nth-child(3n){transform:translateY(-1px)}.wkdots.n3 .wkdot,.wkdots.n4 .wkdot{margin:0 -5px}.wkdots .wkdot.pk{opacity:1;z-index:2}.wkdots.n1,.wkdots.n2,.wkdots.n3{flex-wrap:nowrap;padding:0}.wkdot{display:block;border-radius:50%;box-shadow:0 0 0 1px rgba(0,0,0,.35)}.wkdot.pop{animation:wkpop .45s cubic-bezier(.2,1.6,.4,1)}
 @keyframes wkpop{0%{scale:0}100%{scale:1}}
@@ -594,6 +594,71 @@ nav button{font-size:10.5px!important;letter-spacing:-.02em!important}
 .mcard.sg .mgrid button.md.vg{background:#FFC800!important;box-shadow:0 3px 0 #9a7600!important;font-weight:800}
 .mcard.sg .mgrid button.md.sp{font-weight:800}
 .mcal:not(.gy):not(.sg):not(.rstl):not(.dmood):not(.dmeal) .mgrid button.md.on{background:#FFA800;color:#3a0000;box-shadow:0 3px 0 #9a5f00;font-weight:800}
+
+/* slimmer time slots */
+#today .slot{padding:7px 12px;min-height:0;gap:10px;margin-top:6px}
+#today .slot .l{width:78px;padding-top:2px}
+#today .slot .t{font-size:16px}
+#today .slot .h{font-size:9px;margin-top:2px}
+#today .nowb{margin-top:4px;padding:2px 8px;font-size:8px}
+#today .task{min-height:30px;padding:1px 0}
+#today .slot .none{padding:2px 0;font-size:12px}
+/* compact Hermes */
+.hm{margin-top:10px;padding:10px 12px 8px;display:grid;grid-template-columns:104px minmax(0,1fr);column-gap:12px;align-items:center}
+.hm>.hmh{grid-column:1/-1}
+.hm .hmt{font-size:19px}
+.hm .hmr{grid-column:1;grid-row:2/4;width:104px;height:104px;margin:2px 0 0}
+.hm .hmc b{font-size:19px}.hm .hms{font-size:8px;letter-spacing:.16em}
+.hm .hbt{grid-column:2;grid-row:2;margin-top:0}
+.hm .hb{min-height:36px;font-size:12px;border-radius:10px}
+.hm .hst{grid-column:2;grid-row:3;margin-top:6px}
+.hm .hst div{padding:6px 2px 0;min-width:0}.hm .hst b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hm .hst span{font-size:8px;letter-spacing:.1em}
+.hm .hlr{grid-column:1/-1;margin-top:2px;padding:4px 0 0;font-size:11px}
+/* compact Overdrive */
+.swg{margin-top:8px;padding:10px 12px;border-radius:14px}
+.swtt{font-size:13px}
+.swp{margin-top:6px;padding:8px 4px 6px}
+.swp b{font-size:32px}.swp small{font-size:8px;margin-top:3px}.swp span{font-size:20px;margin-top:2px}
+.swst{margin-top:4px;font-size:11px}
+.swbt{margin-top:6px}.swbt button{min-height:36px;font-size:12px}
+/* AMP: watched tickets shrink to mini stubs */
+.mvr.dn{margin-top:8px;opacity:.7}
+.mvr.dn:before,.mvr.dn:after{right:64px;width:12px;height:12px}.mvr.dn:before{top:-6px}.mvr.dn:after{bottom:-6px}
+.mvr.dn .mvm{padding:6px 8px 6px 10px;gap:0}
+.mvr.dn .mvct{display:none}
+.mvr.dn textarea.mvi{font-size:11px;padding:2px 0;border-bottom:0}
+.mvr.dn .mvc{width:20px;height:20px;font-size:13px}
+.mvr.dn .mvs{width:64px;padding:4px;gap:0}
+.mvr.dn .mvs label:first-child{display:none}
+.mvr.dn .mvs b{font-size:11px}.mvr.dn .mvs small{font-size:7px}
+/* Tartarus magazines */
+.mqcs{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.mqc{min-width:36px;text-align:center;padding:4px 8px;border-radius:8px;font:800 12px var(--body);font-variant-numeric:tabular-nums;box-sizing:border-box}
+.mqc.rd{background:#3df5c0;color:#012320}
+.mqc.ms{border:1.5px dashed #ff8a8a;color:#ff8a8a;background:transparent}
+.mqc.oth{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mqmiss{margin-top:6px;font:700 11px var(--body);letter-spacing:.04em;color:#ff8a8a}
+#tartarus .twb.mgt{padding-left:14px}.moodp #tartarus .twb.mgt{padding-left:14px}
+.mqt{margin-top:10px;padding-top:8px;border-top:1px solid rgba(61,245,192,.25)}
+.mqh{font:700 10px var(--body);letter-spacing:.14em;text-transform:uppercase;color:#6fb8a8}
+.moodp .mqh{color:var(--k)}.moodp .mqt{border-top-color:var(--k)}
+.twadd{display:flex;gap:8px;margin-top:16px}.twadd .addop{margin-top:0;flex:1;width:auto}
+.wkpm{display:flex;gap:8px;margin-top:6px}.wkpm .opt{margin:0;flex:1;text-align:center;font-size:12px;padding:8px}
+.wkm{padding-top:10px;padding-bottom:8px}
+.mqe{padding:10px 0 0!important}
+.moodp .mqc.rd{background:var(--k);color:var(--a)}.moodp .mqc.ms{border-color:var(--k);color:var(--k)}.moodp .mqmiss,.moodp .mqn{color:var(--k)}
+
+/* current time slot: same colors as the rest */
+#today .slot{opacity:1}
+#today .slot.now{box-shadow:none;background:var(--card2)}
+#today .slot.night.now{background:#0e2418}
+.moodp #today .slot.now{box-shadow:4px 4px 0 var(--k)}
+#today .slot.now .t{color:#b6c2e8;text-shadow:none}
+#today .slot.night.now .t{color:var(--gr)}
+.swst:empty{display:none}
+.wkm .wkn{display:block;text-align:center}
+.wkd.fut{opacity:.55}
+.mqx{position:absolute;top:8px;right:10px}
 </style>
 </head>
 <body>
@@ -740,8 +805,8 @@ function sdBSheet(b){var n=!b;b=b||{n:'',d:ymd(0)};sheet(n?'New Habit':'Edit Hab
 function sdBNote(b,kind){var rel=kind==='r';sheet(rel?'Relapse — '+esc(b.n):'Follow-up — '+esc(b.n),'<label for="sdnd" style="margin-top:0">Date</label><input id="sdnd" type="date" max="'+ymd(0)+'" value="'+ymd(0)+'"><label for="sdnx">'+(rel?'What happened? (optional)':'Your thoughts now')+'</label><textarea id="sdnx" rows="5" placeholder="'+(rel?'Trigger, mood, what you’d do differently…':'How is it going? What have you noticed?')+'"></textarea><div id="sde" class="lab" style="color:#ff8a8a;margin-top:6px"></div>',rel?'Log relapse':'Save',function(){var t=$('sdnx').value.trim(),d=$('sdnd').value||ymd(0);if(!rel&&!t){$('sde').textContent='Write your thoughts.';return false}var a=rel?(b.r=b.r||[]):(b.f=b.f||[]);a.push({id:pnId(),at:d,t:t});a.sort(function(x,y){return x.at.localeCompare(y.at)});sdBOpen[b.id]=true;save()})}
 function sdConfirm(msg,fn){sheet('Delete?','<p style="margin:4px 0 10px">'+msg+'</p>','Delete',function(){fn();save()})}
 function rTartarus(){var el=$('tartarus');if(!el)return;var L=S.tw||(S.tw=[]);L.forEach(function(t){if(t.arch||t.nf)return;var q=twFrac(t.note);if(!q)return;if(t.m==='p'&&!+t.p){t.p=q[1];t.nf=q[0];save()}else if(t.m==='b'&&q[4]==='f'&&!+t.d){t.t=Math.max(1,Math.round(q[3]));t.d=Math.min(t.t,Math.round(q[2]));t.nf=q[0];save()}});var live=L.filter(function(t){return!t.arch}).map(function(t,i){return{t:t,i:i}}).sort(function(a,b){return twF(b.t)-twF(a.t)||a.i-b.i}).map(function(o){return o.t}),dn=L.filter(function(t){return t.arch}).sort(function(a,b){return(b.at||'').localeCompare(a.at||'')});
-var h='<div class="pnh"><div><div class="disp title twti">Tartarus</div><div class="sub">Climb, block by block</div></div></div>'+twHero(L)+(live.length?live.map(twCard).join(''):'<div class="none" style="margin-top:14px">No towers yet. Add one to start climbing.</div>')+'<button class="addop" style="margin-top:16px" data-a="twnew">+ New Tower</button>';
-if(dn.length){h+='<button class="tg" style="padding:18px 0 0" data-a="twtog">Conquered ('+dn.length+') '+(twOpen?'\u25b4':'\u25be')+'</button>';if(twOpen)h+=dn.map(function(t){return'<div class="twb cq"><span class="twk">Conquered'+(t.at?' \u00b7 '+fd(t.at):'')+'</span><b class="twn">'+esc(t.n)+'</b>'+'<div class="twa"><button data-a="twre" data-id="'+t.id+'">Climb again</button><button data-a="twedit" data-id="'+t.id+'">Edit</button></div></div>'}).join('')}
+var h='<div class="pnh"><div><div class="disp title twti">Tartarus</div><div class="sub">Climb, block by block</div></div></div>'+twHero(L)+(live.length||magH?live.map(twCard).join(''):'<div class="none" style="margin-top:14px">No towers yet. Add one to start climbing.</div>')+magH+'<div class="twadd"><button class="addop" data-a="twnew">+ New Tower</button><button class="addop" data-a="magstart">+ Magazine</button></div>';
+var mq=magCq();if(dn.length){h+='<button class="tg" style="padding:18px 0 0" data-a="twtog">Conquered ('+dn.length+') '+(twOpen?'\u25b4':'\u25be')+'</button>';if(twOpen)h+=dn.map(function(t){return'<div class="twb cq"><span class="twk">Conquered'+(t.at?' \u00b7 '+fd(t.at):'')+'</span><b class="twn">'+esc(t.n)+'</b>'+'<div class="twa"><button data-a="twre" data-id="'+t.id+'">Climb again</button><button data-a="twedit" data-id="'+t.id+'">Edit</button></div></div>'}).join('')}h+=mq.h;
 h+=shelfH+mvHtml();el.innerHTML=h}
 function twSplit(n){n=String(n||'');var m=n.match(/^(.*?)\s*\/\s*(\d*\.?\d+)\s*$/);return m?[m[1],m[2]]:[n,'']}
 function twNote(){var c=($('twt')||{value:''}).value.trim(),o=($('twtot')||{value:''}).value.trim();return c?(o?c+'/'+o:c):(o?'/'+o:'')}
@@ -835,17 +900,16 @@ h+='<div class="card ops"><div class="list">'+(ops.length?ops.map(function(o){va
 h+=ciHtml();
 var hM1=h;h='';h+='<div class="sec tt"><h3>TODAY’S TIME</h3></div><div class="grp tt3"><button class="pill alt" data-a="tplan">Planner</button><button class="pill grn" data-a="tquick">Quick Time</button></div>';
 SLOTS.forEach(function(s){var ts=S.tasks.filter(function(t){return t.slot===s.k}).sort(function(a,b){return String(a.t).localeCompare(String(b.t),undefined,{sensitivity:'base'})});
-h+='<div class="slot'+(s.k==='dark'?' night':'')+(s.k===curSlot()?' now':'')+'"><div class="l"><div class="t">'+s.n+'</div>'+(s.h?'<div class="h">'+s.h+'</div>':'')+(s.k===curSlot()?'<span class="nowb">NOW</span>':'')+'</div><div class="r">';
+h+='<div class="slot'+(s.k==='dark'?' night':'')+(s.k===curSlot()?' now':'')+'"><div class="l"><div class="t">'+s.n+'</div>'+(s.h?'<div class="h">'+s.h+'</div>':'')+'</div><div class="r">';
 var gh=S.rec.filter(function(r){return r.slot===s.k&&r.on!==ymd(0)}).sort(function(a,b){return String(a.t).localeCompare(String(b.t),undefined,{sensitivity:'base'})});h+=gh.map(function(r){return'<button class="task ghost" data-a="recon" data-id="'+r.id+'"><span>'+esc(r.t)+'</span><em>'+r.stat.toUpperCase()+'</em></button>'}).join('');
 h+=ts.length?ts.map(function(t){return'<button class="task'+(t.done?' done':'')+'" data-a="task" data-id="'+t.id+'"><span>'+esc(t.t)+'</span><em>'+(t.done?'+1 ':'')+t.stat.toUpperCase()+'</em></button>'}).join(''):(gh.length?'':'<div class="none">Nothing planned</div>');
 h+='</div></div>'});
 var hTT=h;h=hM1;h+=runHtml();h+=wkHtml();h+=swHtml();h+=vstHtml();h+=fusHtml();var hOF=ofHtml();
 if(!TDHIDE)h+='<div class="btnrow"><button class="addop" data-a="glopen">Compendium</button></div>';
-var hM2=h;h='';h+=sqHtml();h+='<div class="sec slim" style="margin-top:22px"><h3>RECAP</h3><button class="tg" data-a="chopen">'+(chOpen?'Hide \u25b4':'Show \u25be')+'</button></div>';if(chOpen)h+=statChart();
-var mo=S.mp[ym()]||{};h+='<div class="sec slim" style="margin-top:22px"><h3>SOCIAL STATS</h3><button class="tg" data-a="sttog">'+(stOpen?'Hide \u25b4':'Show \u25be')+'</button></div>';if(stOpen)h+='<div class="stats" style="margin-top:8px">'+STATS.map(function(k){return'<div data-a="pillar" data-id="'+k+'" style="cursor:pointer">'+k+'<small style="display:block;margin-top:4px">'+(mo[k]||0)+' pts</small></div>'}).join('')+'</div>';
+var hM2=h;h='';h+=sqHtml();var mo=S.mp[ym()]||{};h+='<div class="sec slim" style="margin-top:22px"><h3>SOCIAL STATS</h3><button class="tg" data-a="sttog">'+(stOpen?'Hide \u25b4':'Show \u25be')+'</button></div>';if(stOpen)h+='<div class="stats" style="margin-top:8px">'+STATS.map(function(k){return'<div data-a="pillar" data-id="'+k+'" style="cursor:pointer">'+k+'<small style="display:block;margin-top:4px">'+(mo[k]||0)+' pts</small></div>'}).join('')+'</div>';
 
 
-var hRest=h;h=hM1+hTT+hOF+hRest+hM2.slice(hM1.length);
+var hRest=h;h=hM1+hTT+hRest+hM2.slice(hM1.length);
 $('today').innerHTML=h}
 
 var TDHIDE=true,tdArch=false,qdT='',qdS='Knowledge',qdOpen=false,stOpen=false,sqOpen=false;
@@ -933,19 +997,17 @@ function swLbl(ms){var fl=Math.floor(ms/300000);return'FLOOR '+(fl%12+1)+(fl>=12
 function swParts(ms){var q=Math.floor(ms/1000);return[pad(Math.floor(q/3600)),pad(Math.floor(q%3600/60)),pad(q%60)]}
 function swUpd(){var v=$('swh');if(!v)return;var p=swParts(swEl());v.textContent=p[0];$('swm2').textContent=p[1];$('sws2').textContent=p[2]}
 function swHtml(){var w=S.sw||{},ms=swEl(),run=!!w.since,st=ms>0||run,p=swParts(ms);
-return'<div class="swg'+(run?' run':'')+'"><i class="swd1"></i><i class="swd2"></i><div class="swtt">Overdrive</div><div class="swp"><div><b id="swh">'+p[0]+'</b><small>HOURS</small></div><span>:</span><div><b id="swm2">'+p[1]+'</b><small>MINUTES</small></div><span>:</span><div><b id="sws2">'+p[2]+'</b><small>SECONDS</small></div></div><div class="swst">'+(run?'Running…':st?'Paused':'Ready')+'</div><div class="swbt"><button class="swgo" data-a="swgo">'+(run?'PAUSE':st?'RESUME':'START')+'</button>'+(st?'<button class="swrs" data-a="swrst">RESET</button>':'')+'</div></div>'}
+return'<div class="swg'+(run?' run':'')+'"><i class="swd1"></i><i class="swd2"></i><div class="swtt">Overdrive</div><div class="swp"><div><b id="swh">'+p[0]+'</b><small>HOURS</small></div><span>:</span><div><b id="swm2">'+p[1]+'</b><small>MINUTES</small></div><span>:</span><div><b id="sws2">'+p[2]+'</b><small>SECONDS</small></div></div><div class="swst">'+(run?'Running…':st?'Paused':'')+'</div><div class="swbt"><button class="swgo" data-a="swgo">'+(run?'PAUSE':st?'RESUME':'START')+'</button>'+(st?'<button class="swrs" data-a="swrst">RESET</button>':'')+'</div></div>'}
 function vstSheet(t){sheet(t?'Edit chore':'New chore','<label for="vsn" style="margin-top:0">Task</label><input id="vsn" maxlength="40" placeholder="e.g. Laundry" value="'+esc(t?t.n:'')+'"><label for="vsd">Last done</label><div class="vsdr"><input id="vsd" type="date" max="'+ymd(0)+'" value="'+(t&&t.d?t.d:'')+'"><button class="opt" data-a="vsttoday" style="margin:0;width:auto;padding:0 14px">Today</button></div><div id="vse" class="lab" style="color:#ff8a8a;margin-top:6px"></div>'+(t?'<button class="opt dg" data-a="vstdel" data-id="'+t.id+'">Delete chore</button>':''),'Save',function(){var n=$('vsn').value.trim(),d=$('vsd').value;if(!n){$('vse').textContent='Give it a name.';return false}if(t){t.n=n;t.d=d}else S.vst.push({id:pnId(),n:n,d:d});save()})}
 var wkV=0,wkPop='',WKSZ={l:11,m:14,h:17},WKIN={l:'Low',m:'Med',h:'High'},WKCOL=['#ff5d73','#ffb347','#ffd93d','#4fd18b','#38c6e8','#6c8cff','#c77dff','#ff8fd1','#2ec4b6','#b8e35a','#e8eefc','#c08552','#9aa5c4'];
 function wkPart(id){return(S.wkp||[]).filter(function(p){return p.id===id})[0]}
 function wkDot(e,pop){var p=wkPart(e.p);return'<i class="wkdot'+(pop?' pop':'')+(e.k?' pk':'')+'" style="width:'+WKSZ[e.i||'m']+'px;height:'+WKSZ[e.i||'m']+'px;background:'+(p?p.c:'#8a93b5')+'"></i>'}
-function wkHtml(){var W=S.wk||(S.wk={}),now=new Date(),b=new Date(now.getFullYear(),now.getMonth()+wkV,1),y=b.getFullYear(),mo=b.getMonth(),dim=new Date(y,mo+1,0).getDate(),off=b.getDay(),pre=y+'-'+pad(mo+1)+'-',td=ymd(0),tot=0,days=0,cnt={};
-var g=['S','M','T','W','T','F','S'].map(function(x){return'<i class="wkw">'+x+'</i>'}).join('');for(var i=0;i<off;i++)g+='<i></i>';
-for(var d=1;d<=dim;d++){var k=pre+pad(d),E=W[k]||[];if(E.length){days++;tot+=E.length;E.forEach(function(e){cnt[e.p]=(cnt[e.p]||0)+1})}g+='<button class="wkd'+(k===td?' tdy':'')+(E.length?' has':'')+'" data-a="wkday" data-d="'+k+'"><b>'+d+'</b><span class="wkdots n'+Math.min(E.length,4)+'">'+E.map(function(e){return wkDot(e,e.id===wkPop)}).join('')+'</span></button>'}
+function wkHtml(){var W=S.wk||(S.wk={}),now=new Date(),td=ymd(0),dow=now.getDay(),tot=0,days=0,g=['S','M','T','W','T','F','S'].map(function(x){return'<i class="wkw">'+x+'</i>'}).join('');
+for(var i=0;i<21;i++){var o=i-14-dow,dt=new Date(now.getFullYear(),now.getMonth(),now.getDate()+o),k=ymd(o),E=W[k]||[];if(E.length){days++;tot+=E.length}
+g+='<button class="wkd'+(k===td?' tdy':'')+(o>0?' fut':'')+(E.length?' has':'')+'" data-a="wkday" data-d="'+k+'"><b>'+(dt.getDate()===1?dt.toLocaleDateString([],{month:'short'})+' 1':dt.getDate())+'</b><span class="wkdots n'+Math.min(E.length,4)+'">'+E.map(function(e){return wkDot(e,e.id===wkPop)}).join('')+'</span></button>'}
 wkPop='';
-var bar=tot?'<div class="wkbar">'+(S.wkp||[]).filter(function(p){return cnt[p.id]}).map(function(p){return'<i style="flex:'+cnt[p.id]+';background:'+p.c+'"></i>'}).join('')+'</div>':'';
-var lg=(S.wkp||[]).map(function(p){return'<button class="wkc" data-a="wkpedit" data-id="'+p.id+'" style="--c:'+p.c+'"><i></i>'+esc(p.n)+(cnt[p.id]?'<small>'+cnt[p.id]+'</small>':'')+'</button>'}).join('')+'<button class="wkc add" data-a="wkpnew">+ Part</button>';
-return'<div class="wkm"><div class="hmh"><b class="hmt">THOR</b><span class="hmk">\u25c6 Tap a day to log</span></div><div class="wkn"><button class="mnav" data-a="wkmon" data-v="-1" aria-label="Previous month">\u2039</button><div><span class="wkl">'+b.toLocaleDateString([],{month:'long',year:'numeric'})+'</span><b class="wkt">'+tot+(tot===1?' workout':' workouts')+' \u00b7 '+days+(days===1?' day':' days')+'</b></div><button class="mnav" data-a="wkmon" data-v="1"'+(wkV>=0?' disabled':'')+' aria-label="Next month">\u203a</button></div>'+bar+'<div class="wkg">'+g+'</div><div class="wkk"><span><i style="width:6px;height:6px"></i>Low</span><span><i style="width:9px;height:9px"></i>Med</span><span><i style="width:12px;height:12px"></i>High</span><span><i style="width:10px;height:10px;box-shadow:0 0 0 2px #02040d,0 0 0 3px rgba(255,255,255,.4)"></i>Peak</span></div><div class="wkcs">'+lg+'</div></div>'}
-function wkSheet(day){var E=(S.wk||{})[day]||[];sheet(dayLbl(day),'<div class="wke">'+(E.length?E.map(function(e){var p=wkPart(e.p);return'<div class="wker"><span>'+wkDot(e,false)+(p?esc(p.n):'(removed)')+' \u00b7 '+WKIN[e.i||'m']+(e.k?' \u00b7 Peak':'')+'</span><button class="x" data-a="wkdel" data-d="'+day+'" data-id="'+e.id+'" aria-label="Delete">\u00d7</button></div>'}).join(''):'<div class="none">Nothing logged this day.</div>')+'</div><label>Body part</label><div class="wkp">'+(S.wkp||[]).map(function(p){return'<button class="wkb" data-a="wkpick" data-id="'+p.id+'" style="--c:'+p.c+'"><i></i>'+esc(p.n)+'</button>'}).join('')+'</div><label>Intensity</label><div class="wki">'+['l','m','h'].map(function(k){return'<button class="wkb2'+(k==='m'?' on':'')+'" data-a="wkint" data-v="'+k+'"><i style="width:'+WKSZ[k]+'px;height:'+WKSZ[k]+'px"></i>'+WKIN[k]+'</button>'}).join('')+'</div><button class="wkpk" data-a="wkpk"><i></i>Peak reached</button><div id="wkerr" class="lab" style="color:#ff8a8a;margin-top:6px"></div><button class="opt" data-a="wkmore" data-d="'+day+'" style="text-align:center;margin-top:8px">+ Log and add another</button>','Log workout',function(){return wkAdd(day)?undefined:false})}
+return'<div class="wkm"><div class="hmh"><b class="hmt">THOR</b><span class="hmk">\u25c6 Tap a day to log</span></div><div class="wkn"><div><span class="wkl">Last 3 weeks</span><b class="wkt">'+tot+(tot===1?' workout':' workouts')+' \u00b7 '+days+(days===1?' day':' days')+'</b></div></div><div class="wkg">'+g+'</div></div>'}
+function wkSheet(day){var E=(S.wk||{})[day]||[];sheet(dayLbl(day),'<div class="wke">'+(E.length?E.map(function(e){var p=wkPart(e.p);return'<div class="wker"><span>'+wkDot(e,false)+(p?esc(p.n):'(removed)')+' \u00b7 '+WKIN[e.i||'m']+(e.k?' \u00b7 Peak':'')+'</span><button class="x" data-a="wkdel" data-d="'+day+'" data-id="'+e.id+'" aria-label="Delete">\u00d7</button></div>'}).join(''):'<div class="none">Nothing logged this day.</div>')+'</div><label>Body part</label><div class="wkp">'+(S.wkp||[]).map(function(p){return'<button class="wkb" data-a="wkpick" data-id="'+p.id+'" style="--c:'+p.c+'"><i></i>'+esc(p.n)+'</button>'}).join('')+'</div><div class="wkpm"><button class="opt" data-a="wkpnew">+ Part</button><button class="opt" data-a="wkpedsel">Edit selected</button></div><label>Intensity</label><div class="wki">'+['l','m','h'].map(function(k){return'<button class="wkb2'+(k==='m'?' on':'')+'" data-a="wkint" data-v="'+k+'"><i style="width:'+WKSZ[k]+'px;height:'+WKSZ[k]+'px"></i>'+WKIN[k]+'</button>'}).join('')+'</div><button class="wkpk" data-a="wkpk"><i></i>Peak reached</button><div id="wkerr" class="lab" style="color:#ff8a8a;margin-top:6px"></div><button class="opt" data-a="wkmore" data-d="'+day+'" style="text-align:center;margin-top:8px">+ Log and add another</button>','Log workout',function(){return wkAdd(day)?undefined:false})}
 function wkAdd(day){var pb=document.querySelector('#sheet .wkp .wkb.on'),ib=document.querySelector('#sheet .wki .on');if(!pb){$('wkerr').textContent='Pick a body part.';return false}var W=S.wk||(S.wk={}),e={id:pnId(),p:pb.dataset.id,i:ib?ib.dataset.v:'m'};if(document.querySelector('#sheet .wkpk.on'))e.k=1;(W[day]=W[day]||[]).push(e);wkPop=e.id;save();return true}
 function wkPSheet(p){sheet(p?'Edit body part':'New body part','<label for="wkn" style="margin-top:0">Name</label><input id="wkn" maxlength="20" placeholder="e.g. Core" value="'+esc(p?p.n:'')+'"><label>Color</label><div class="wksw">'+WKCOL.map(function(c){return'<button class="wks'+((p?p.c:'')===c?' on':'')+'" data-a="wkcol" data-v="'+c+'" style="background:'+c+'" aria-label="Color"></button>'}).join('')+'</div><div id="wkne" class="lab" style="color:#ff8a8a;margin-top:6px"></div>'+(p&&p.custom?'<button class="opt dg" data-a="wkpdel" data-id="'+p.id+'">Delete part and its logs</button>':''),'Save',function(){var n=$('wkn').value.trim(),cb=document.querySelector('#sheet .wks.on');if(!n){$('wkne').textContent='Give it a name.';return false}if(!cb){$('wkne').textContent='Pick a color.';return false}if(p){p.n=n;p.c=cb.dataset.v}else S.wkp.push({id:pnId(),n:n,c:cb.dataset.v,custom:true});save()})}
 var RUNC=2*Math.PI*62;
@@ -1065,6 +1127,20 @@ var curLib=[];
 function fillFrom(i){var e=curLib[i];if(!e)return;if($('f4')&&!(plOpen&&plForm&&plPre)&&PLAN.some(function(s){return s.k===e.slot}))$('f2').value=e.slot;$('f3').value=e.stat}
 
 /* Shelf: magazines */
+function magNum(n){var m=String(n||'').match(/\d+/g)||[];for(var i=0;i<m.length;i++){var v=+m[i];if(m[i].length<=4&&!(v>=1900&&v<=2100))return v}return null}
+function magRow(a){return'<div class="ma rdo"><span class="rck">\u2713</span><input class="mai" id="mga'+a.id+'" maxlength="40" value="'+esc(a.n)+'" aria-label="Issue name">'+(a.at?'<small>'+fd(a.at)+'</small>':'')+'<button class="x" data-a="magadel" data-id="'+a.id+'" aria-label="Delete">\u00d7</button></div>'}
+function magCq(){var L=(S.mags||[]).filter(function(m){return(m.arch||[]).length}).sort(function(a,b){return a.n.localeCompare(b.n)}),n=0,h='';if(!L.length)return{n:0,h:''};
+h='<div class="sec" style="margin:22px 0 0"><h3>CONQUERED \u00b7 MAGAZINES</h3></div>';
+L.forEach(function(m){n+=m.arch.length;h+='<div class="twb cq mqm"><span class="twk">Magazine</span><b class="twn">'+esc(m.n)+'</b><button class="x mqx" data-a="magedit" data-id="'+m.id+'" aria-label="Edit">\u22ef</button>'+magTrk(m)+'</div>'});
+return{n:n,h:h}}
+function magStartSheet(){var ms=(S.mags||[]).slice().sort(function(a,b){return a.n.localeCompare(b.n)});
+sheet('Start a magazine','<label for="msn" style="margin-top:0">Magazine</label><input id="msn" list="msl" maxlength="50" placeholder="Pick or type a name" autocomplete="off"><datalist id="msl">'+ms.map(function(m){return'<option value="'+esc(m.n)+'">'}).join('')+'</datalist><label for="msi">Issue</label><input id="msi" maxlength="40" placeholder="e.g. 124"><label for="msp">Page (optional)</label><input id="msp" inputmode="numeric" maxlength="8" placeholder="Page"><div id="mse" class="lab" style="color:#ff8a8a;margin-top:6px"></div>','Start',function(){var n=V('msn'),i=V('msi'),pg=V('msp');if(!n){$('mse').textContent='Pick or name a magazine.';return false}if(!i&&!pg){$('mse').textContent='Add the issue name or number.';return false}var m=(S.mags||[]).filter(function(x){return x.n.toLowerCase()===n.toLowerCase()})[0];if(!m){m=newMag(n);S.mags.push(m)}m.iss=m.iss||[];var c=m.iss.filter(function(x){return!x.n&&!x.page})[0];if(!c){c={id:'is'+Date.now()+Math.floor(Math.random()*1000),n:'',page:''};m.iss.push(c)}c.n=i;c.page=pg;m.sel=c.id})}
+function magTrk(m){var ar=m.arch||[];if(!ar.length)return'';var rd={},oth=[],ms=[],ch='';
+ar.forEach(function(a){var v=magNum(a.n);if(v===null)oth.push(a);else rd[v]=a});
+var ks=Object.keys(rd).map(Number).sort(function(x,y){return x-y});
+if(ks.length){var lo=ks[0],hi=ks[ks.length-1];if(hi-lo<=150){for(var v=lo;v<=hi;v++){if(rd[v])ch+='<span class="mqc rd" title="'+esc(rd[v].n)+'">'+v+'</span>';else{ms.push(v);ch+='<span class="mqc ms" title="Missing">'+v+'</span>'}}}else ks.forEach(function(v){ch+='<span class="mqc rd" title="'+esc(rd[v].n)+'">'+v+'</span>'})}
+oth.forEach(function(a){ch+='<span class="mqc rd oth">'+esc(a.n)+'</span>'});
+return'<div class="mqt"><div class="mqh">Issues read \u00b7 '+ar.length+'</div><div class="mqcs">'+ch+'</div>'+(ms.length?'<div class="mqmiss">Missing: '+ms.slice(0,12).join(', ')+(ms.length>12?' +'+(ms.length-12)+' more':'')+'</div>':'')+'<button class="tg mqe" data-a="magarchtog" data-id="'+m.id+'">'+(magOpen[m.id]?'Hide':'Edit')+' read issues '+(magOpen[m.id]?'\u25b4':'\u25be')+'</button>'+(magOpen[m.id]?ar.slice().sort(function(x,y){return x.n.localeCompare(y.n,undefined,{numeric:true,sensitivity:'base'})}).map(magRow).join(''):'')+'</div>'}
 function newMag(n){return{id:'mg'+Date.now()+Math.floor(Math.random()*1000),n:n,cur:'',page:'',iss:[],sel:'',reads:0,arch:[]}}
 var magOpen={};
 var dMon=0;
@@ -1078,13 +1154,13 @@ function dayLbl(k){var p=k.split('-');return new Date(+p[0],+p[1]-1,+p[2]).toLoc
 function magIss(m){if(!m.iss)m.iss=[];if(!m.iss.length){var n={id:'is'+Date.now()+Math.floor(Math.random()*1000),n:'',page:''};m.iss.push(n);m.sel=n.id}var c=m.iss.filter(function(x){return x.id===m.sel})[0];if(!c){c=m.iss[0];m.sel=c.id}return c}
 function magChip(x){return esc(x.n||'New issue')+(x.page?' <em>p'+esc(x.page)+'</em>':'')}
 function findIss(id){var ms=S.mags||[];for(var i=0;i<ms.length;i++){var is=ms[i].iss||[];for(var j=0;j<is.length;j++)if(is[j].id===id)return{m:ms[i],x:is[j]}}return null}
-var shelfH='';function rShelf(){var L=(S.mags||[]).slice().sort(function(a,b){return a.n.localeCompare(b.n)});
-var h='<div class="sec" style="margin:26px 0 8px"><h3 style="color:#8d9bc8">SHELF</h3></div>';var hm='<div class="sec" style="margin-top:22px;padding:0 13px"><h3>MAGAZINES</h3><button class="pill grn" data-a="magnew">Add</button></div>';
-hm+=L.length?L.map(function(m){var ar=m.arch||[];var si=magIss(m);return'<div class="mag"><div class="mh"><div class="mt"><b>'+esc(m.n)+'</b></div><button class="x" data-a="magedit" data-id="'+m.id+'" aria-label="Edit">⋯</button></div><div class="ichips">'+m.iss.map(function(x){return'<button class="ichip'+(x.id===m.sel?' on':'')+'" data-a="magiss" data-id="'+m.id+'" data-k="'+x.id+'">'+magChip(x)+'</button>'}).join('')+'<button class="ichip add" data-a="magiadd" data-id="'+m.id+'">+ Issue</button></div><div class="mr"><input id="mgi'+si.id+'" class="mi" maxlength="40" placeholder="Issue name" value="'+esc(si.n||'')+'" aria-label="Issue"><input id="mgp'+si.id+'" class="mpg" inputmode="numeric" maxlength="8" placeholder="Page" value="'+esc(si.page||'')+'" aria-label="Page left off"><button class="addop mrb" data-a="magarch" data-id="'+m.id+'">Mark read</button>'+(m.iss.length>1?'<button class="x" data-a="magissx" data-id="'+m.id+'" data-k="'+si.id+'" aria-label="Remove issue">×</button>':'')+'</div>'+(ar.length?'<button class="tg" style="padding:8px 0 0" data-a="magarchtog" data-id="'+m.id+'">Read issues ('+ar.length+') '+(magOpen[m.id]?'▴':'▾')+'</button>':'')+(magOpen[m.id]?ar.slice().sort(function(x,y){return x.n.localeCompare(y.n,undefined,{numeric:true,sensitivity:'base'})}).map(function(a){return'<div class="ma rdo"><span class="rck">\u2713</span><input class="mai" id="mga'+a.id+'" maxlength="40" value="'+esc(a.n)+'" aria-label="Issue name">'+(a.at?'<small>'+fd(a.at)+'</small>':'')+'<button class="x" data-a="magadel" data-id="'+a.id+'" aria-label="Delete">×</button></div>'}).join(''):'')+'</div>'}).join(''):'<div class="none">No magazines yet. Tap Add.</div>';
+var shelfH='',magH='';function rShelf(){var L=(S.mags||[]).slice().sort(function(a,b){return a.n.localeCompare(b.n)});
+var h='<div class="sec" style="margin:26px 0 8px"><h3 style="color:#8d9bc8">SHELF</h3></div>';var hm='';
+var LC=L.filter(function(m){return(m.iss||[]).some(function(x){return x.n||x.page})});hm+=LC.length?LC.map(function(m){var ar=m.arch||[];var si=magIss(m);return'<div class="mag twb mgt"><div class="mh"><div class="mt"><span class="twk">Magazine</span><b class="twn">'+esc(m.n)+'</b></div><button class="x" data-a="magedit" data-id="'+m.id+'" aria-label="Edit">⋯</button></div><div class="ichips">'+m.iss.map(function(x){return'<button class="ichip'+(x.id===m.sel?' on':'')+'" data-a="magiss" data-id="'+m.id+'" data-k="'+x.id+'">'+magChip(x)+'</button>'}).join('')+'<button class="ichip add" data-a="magiadd" data-id="'+m.id+'">+ Issue</button></div><div class="mr"><input id="mgi'+si.id+'" class="mi" maxlength="40" placeholder="Issue name" value="'+esc(si.n||'')+'" aria-label="Issue"><input id="mgp'+si.id+'" class="mpg" inputmode="numeric" maxlength="8" placeholder="Page" value="'+esc(si.page||'')+'" aria-label="Page left off"><button class="addop mrb" data-a="magarch" data-id="'+m.id+'">Mark read</button>'+(m.iss.length>1?'<button class="x" data-a="magissx" data-id="'+m.id+'" data-k="'+si.id+'" aria-label="Remove issue">×</button>':'')+'</div>'+''+'</div>'}).join(''):'';
 h+='<div class="bkbox"><div class="sec" style="margin-top:0"><h3>BOOKS</h3><button class="pill grn" data-a="booknew">Add</button></div>';
 h+=(S.books||[]).length?S.books.map(function(b){var pv=(b.notes||'').trim().split('\n')[0];return'<button class="bkrow" data-a="bookopen" data-id="'+b.id+'"><b>'+esc(b.t)+'</b><small>See more</small></button>'}).join(''):'<div class="none">What are you reading? Tap Add.</div>';
 h+='</div>';
-shelfH=h+hm}
+shelfH=h;magH=hm}
 var bookCur=null,fireCur=null;
 function fireSheet(b,ask){fireCur=b.id;if(!b.ck){b.ck=(b.notes||'').split('\n').map(function(x){return x.trim()}).filter(Boolean).map(function(x,i){return{id:i+1,t:x,d:false}});b.notes='';save()}var c=b.ck;sheet(esc(b.t),ask?'<div class="hint">Delete <b>'+esc(b.t)+'</b> and its checklist? This can’t be undone.</div><div class="btns"><button class="btn" data-a="fireno" data-id="'+b.id+'">Keep it</button><button class="btn p" style="background:#ff9a8a;border-color:#ff9a8a" data-a="firedel" data-id="'+b.id+'">Delete</button></div>':'<label for="frt">Title</label><input id="frt" maxlength="80" value="'+esc(b.t)+'"><label style="margin-top:12px">What do you love about it?'+(c.length?' ('+c.filter(function(x){return x.d}).length+'/'+c.length+')':'')+'</label>'+c.map(function(x){return'<div class="jrow"><button class="ck'+(x.d?' d':'')+'" data-a="frck" data-id="'+b.id+'" data-k="'+x.id+'"><i>'+(x.d?'✓':'')+'</i><span>'+esc(x.t)+'</span></button><button class="x" data-a="frcx" data-id="'+b.id+'" data-k="'+x.id+'" aria-label="Remove">×</button></div>'}).join('')+'<div class="addrow"><input id="frn" maxlength="120" placeholder="Describe it"><button class="sm grn" data-a="frca" data-id="'+b.id+'">Add</button></div><button class="opt dg" data-a="fireask" data-id="'+b.id+'">Delete entry</button>',null)}
 function bookSheet(b,ask){bookCur=b.id;sheet(esc(b.t),ask?'<div class="hint">Delete <b>'+esc(b.t)+'</b> and all its notes? This can\u2019t be undone.</div><div class="btns"><button class="btn" data-a="bookno" data-id="'+b.id+'">Keep it</button><button class="btn p" style="background:#ff9a8a;border-color:#ff9a8a" data-a="bookdel" data-id="'+b.id+'">Delete</button></div>':'<label for="bkt">Title</label><input id="bkt" maxlength="80" value="'+esc(b.t)+'"><label for="bkn">Notes</label><textarea id="bkn" rows="9" placeholder="Ideas, quotes, page numbers\u2026">'+esc(b.notes||'')+'</textarea><button class="opt dg" data-a="bookask" data-id="'+b.id+'">Finished \u2014 delete book &amp; notes</button>',null)}
@@ -2186,7 +2262,7 @@ if(a==='wkpick'||a==='wkint'){[].forEach.call(t.parentNode.children,function(c){
 if(a==='wkcol'){[].forEach.call(t.parentNode.children,function(c){c.classList.remove('on')});t.classList.add('on');return}
 if(a==='wkmore'){var wd=t.dataset.d;if(wkAdd(wd)){rToday();wkSheet(wd)}return}
 if(a==='wkdel'){var wd2=t.dataset.d;S.wk[wd2]=(S.wk[wd2]||[]).filter(function(e){return e.id!==id});if(!S.wk[wd2].length)delete S.wk[wd2];save();rToday();wkSheet(wd2);return}
-if(a==='wkpnew'){wkPSheet(null);return}
+if(a==='wkpedsel'){var sb=document.querySelector('#sheet .wkp .wkb.on'),sp=sb?wkPart(sb.dataset.id):null;if(sp)wkPSheet(sp);else if($('wkerr'))$('wkerr').textContent='Tap a body part first, then Edit.';return}if(a==='wkpnew'){wkPSheet(null);return}
 if(a==='wkpedit'){var wp=wkPart(id);if(wp)wkPSheet(wp);return}
 if(a==='wkpdel'){S.wkp=S.wkp.filter(function(p){return p.id!==id});Object.keys(S.wk).forEach(function(k){S.wk[k]=S.wk[k].filter(function(e){return e.p!==id});if(!S.wk[k].length)delete S.wk[k]});save();closeSheet();rToday();return}
 if(a==='runstart'){S.run={st:'run',t0:Date.now(),acc:0};var tm=trmAct(true);if(tm){S.run.tm=tm.id;if(!tm.since){tm.since=Date.now();lkPlay()}}save();render();return}
@@ -2245,7 +2321,7 @@ if(a==='aplog'){var al=by(S.acts,id),ao=+$('ad').value,sv=$('as').value,ev=$('ae
 if(a==='apstart'){var ap=by(S.acts,id),sv2=$('ast').value;if(!ap||!sv2)return;var d0=atTime(0,sv2);if(d0>Date.now())d0=atTime(1,sv2);ap.acc=0;ap.since=d0.getTime();evokeSnd();lkPlay();closeSheet();render();return}
 if(a==='arename'){var ra=by(S.acts,id);if(ra)sheet('Rename Focus Floor','<label for="f1">Name</label><input id="f1" maxlength="40" value="'+esc(ra.name)+'">','Save',function(){var n=V('f1');if(!n)return false;var o=ra.name;ra.name=n;(S.hist||[]).forEach(function(h){if(h.name===o)h.name=n})});return}if(a==='frck'||a==='frcx'||a==='frca'){var fb=by(S.fire,id);if(fb){fb.ck=fb.ck||[];if(a==='frck'){var fi=fb.ck.filter(function(c){return c.id==t.dataset.k})[0];if(fi)fi.d=!fi.d}else if(a==='frcx')fb.ck=fb.ck.filter(function(c){return c.id!=t.dataset.k});else{var ft=$('frn').value.trim();if(ft){var fm=fb.ck.reduce(function(m,c){return Math.max(m,c.id)},0);fb.ck.push({id:fm+1,t:ft,d:false})}}save();fireSheet(fb,false);}return}
 if(a==='firenew'){sheet('Ragnarok','<label for="f1">What is it?</label><input id="f1" maxlength="80" placeholder="A book, a show, a place\u2026">','Add',function(){var n=V('f1');if(!n)return false;(S.fire=S.fire||[]).push({id:'fr'+Date.now(),t:n,notes:''})});return}if(a==='fireopen'||a==='fireno'){var fo=by(S.fire,id);if(fo)fireSheet(fo,false);return}if(a==='fireask'){var fq=by(S.fire,id);if(fq)fireSheet(fq,true);return}if(a==='firedel'){S.fire=S.fire.filter(function(x){return x.id!=id});fireCur=null;closeSheet();render();return}
-if(a==='booknew'){sheet('Add a book','<label for="f1">Title</label><input id="f1" maxlength="80" placeholder="Book title">','Add',function(){var n=V('f1');if(!n)return false;S.books.push({id:'bk'+Date.now(),t:n,notes:''})});return}if(a==='bookopen'){var bo=by(S.books,id);if(bo)bookSheet(bo,false);return}if(a==='bookask'){var bq=by(S.books,id);if(bq)bookSheet(bq,true);return}if(a==='bookno'){var bn=by(S.books,id);if(bn)bookSheet(bn,false);return}if(a==='bookdel'){S.books=S.books.filter(function(x){return x.id!=id});bookCur=null;closeSheet();render();return}if(a==='magnew'){magSheet(null);return}if(a==='magedit'){magSheet(by(S.mags,id));return}if(a==='magdel'){S.mags=S.mags.filter(function(x){return x.id!=id});closeSheet();render();return}if(a==='magiss'){var m1=by(S.mags,id);if(m1){m1.sel=t.dataset.k;save()}rShelf();rJournal();return}
+if(a==='booknew'){sheet('Add a book','<label for="f1">Title</label><input id="f1" maxlength="80" placeholder="Book title">','Add',function(){var n=V('f1');if(!n)return false;S.books.push({id:'bk'+Date.now(),t:n,notes:''})});return}if(a==='bookopen'){var bo=by(S.books,id);if(bo)bookSheet(bo,false);return}if(a==='bookask'){var bq=by(S.books,id);if(bq)bookSheet(bq,true);return}if(a==='bookno'){var bn=by(S.books,id);if(bn)bookSheet(bn,false);return}if(a==='bookdel'){S.books=S.books.filter(function(x){return x.id!=id});bookCur=null;closeSheet();render();return}if(a==='magstart'){magStartSheet();return}if(a==='magnew'){magSheet(null);return}if(a==='magedit'){magSheet(by(S.mags,id));return}if(a==='magdel'){S.mags=S.mags.filter(function(x){return x.id!=id});closeSheet();render();return}if(a==='magiss'){var m1=by(S.mags,id);if(m1){m1.sel=t.dataset.k;save()}rShelf();rJournal();return}
 if(a==='magiadd'){var m2=by(S.mags,id);if(m2){var ni={id:'is'+Date.now()+Math.floor(Math.random()*1000),n:'',page:''};m2.iss=m2.iss||[];m2.iss.push(ni);m2.sel=ni.id;save();rShelf();rJournal();}return}
 if(a==='magissx'){var m3=by(S.mags,id);if(m3){m3.iss=(m3.iss||[]).filter(function(x){return x.id!==t.dataset.k});m3.sel=m3.iss.length?m3.iss[0].id:'';save()}rShelf();rJournal();return}
 if(a==='magarch'){var ma=by(S.mags,id);if(ma){var si=magIss(ma),ci=($('mgi'+si.id)?$('mgi'+si.id).value:si.n||'').trim(),cp=($('mgp'+si.id)?$('mgp'+si.id).value:si.page||'').trim();if(ci||cp){ma.arch=ma.arch||[];ma.arch.unshift({id:'ar'+Date.now()+Math.floor(Math.random()*1000),n:ci||'Untitled issue',at:ymd(0)});ma.reads=(ma.reads||0)+1;ma.iss=ma.iss.filter(function(x){return x.id!==si.id});ma.sel=ma.iss.length?ma.iss[0].id:'';magOpen[id]=true}}save();rShelf();rJournal();return}
