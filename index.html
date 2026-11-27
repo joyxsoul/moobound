@@ -922,7 +922,7 @@ nav button{font-size:10px}
 <section class="screen" id="med"></section><section class="screen" id="mood"></section><section class="screen" id="pantry"></section><section class="screen" id="tartarus"></section><section class="screen" id="wtd"></section>
 <section class="screen" id="dbk"></section>
 <section class="screen" id="shadows"></section>
-<nav id="nav"><button class="on" data-a="tab" data-s="today">Today</button><button data-a="tab" data-s="tartarus">Tartarus</button><button data-a="tab" data-s="med">Invigorate</button><button data-a="tab" data-s="mood">Mood</button><button data-a="tab" data-s="shadows">Shadows</button><button data-a="tab" data-s="wtd">Night Out</button><button data-a="tab" data-s="dbk">Daybreak</button></nav>
+<nav id="nav"><button class="on" data-a="tab" data-s="today">Today</button><button data-a="tab" data-s="dbk">Daybreak</button><button data-a="tab" data-s="wtd">Night Out</button><button data-a="tab" data-s="tartarus">Tartarus</button><button data-a="tab" data-s="med">Invigorate</button><button data-a="tab" data-s="mood">Mood</button><button data-a="tab" data-s="shadows">Shadows</button></nav>
 <div id="sheet"></div>
 </div>
 <script>
@@ -1160,7 +1160,7 @@ h+='</div></div>'});
 var hTT=h;h=hM1;h+=fusHtml();var hOF=ofHtml();
 if(!TDHIDE)h+='<div class="btnrow"><button class="addop" data-a="glopen">Compendium</button></div>';
 var hM2=h;h='';h+=sqHtml();
-var hRest=h;h=hM1+vstHtml()+hTT+hRest+hM2.slice(hM1.length);
+h=hM1+vstHtml()+hM2.slice(hM1.length);
 $('today').innerHTML=h}
 
 var TDHIDE=true,tdArch=false,qdT='',qdS='Knowledge',qdOpen=false,stOpen=false,sqOpen=false;
