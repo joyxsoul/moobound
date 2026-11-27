@@ -910,6 +910,23 @@ nav button{font-size:10px}
 #dbk .dbd .dbadj{margin:0;justify-content:space-between;gap:4px}
 #dbk .dbd .dbadj span{font-size:11px;color:#8a5a1c;font-weight:600}
 #dbk .dbd .dbadj .dbq{min-width:44px}
+#dbk .dbsun{background:linear-gradient(180deg,#ffd9a0,#fff6e6);padding:0}
+#dbk .dbsun>div:first-child{padding:10px 12px 6px}
+#dbk .dbsun .dbs{background:none;color:#6b4a14;border:0;border-top:1.5px dashed #e0b878;border-radius:0;font-size:11px;text-align:left;padding:6px 12px 8px}
+#dbk .dbsun .dbs b{color:#2b1500}
+#dbk .dbdial{display:flex;align-items:center;gap:12px}
+#dbk .dbdl{flex:none;max-width:44%}
+#dbk .dbdb{font:italic 900 24px/1.05 system-ui;color:#2b1500}
+#dbk .dbds{font:700 9px system-ui;letter-spacing:1.2px;color:#8a5a1c;margin-top:2px}
+#dbk .dbdr2{flex:1;min-width:0}
+#dbk .dbdt{position:relative;height:38px}
+#dbk .dbdt>*{position:absolute}
+#dbk .dbln{left:0;right:0;top:18px;height:2px;background:#e6c99b}
+#dbk .dbel{left:0;top:17px;height:4px;border-radius:2px;background:#ffc400}
+#dbk .dbsp{top:17px;height:4px}
+#dbk .dbdot{width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid #ffc400;box-shadow:0 0 10px 3px #ffc40088;transform:translate(-50%,-50%);box-sizing:border-box}
+#dbk .dbdk{position:relative;height:12px;font:700 9px system-ui;color:#8a5a1c}
+#dbk .dbdk span{position:absolute;top:0;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -1545,17 +1562,17 @@ if(d.day!==ymd(0)){var items=[];d.habs.forEach(function(h){var a=d.al[h.id]||0,u
 if(items.length&&d.saved!==d.day)d.ask={day:d.day,free:d.free,items:items};
 d.day=ymd(0);d.al={};d.t={};d.free=0;d.sel='';d.sort='';save()}
 return d}
-function dbkSun(){var d=dbk(),pl=0,sp=0,rows=[];d.habs.forEach(function(h){var a=(d.al[h.id]||0)/60,u=dbkUsed(d,h.id)/3600000;pl+=a;sp+=u;if(a>0)rows.push({c:dbkCol(h.id),a:a,u:Math.min(u,a)})});
-var T=Math.max(d.free,pl);if(T<=0)T=6;var cx=170,cy=150,R=118,A0=Math.PI*0.93,SP=Math.PI*0.86;
-function ang(h){return A0-SP*h/T}function P(r,a){return[(cx+r*Math.cos(a)).toFixed(1),(cy-r*Math.sin(a)).toFixed(1)]}
-function arc(r,a0,a1){var p0=P(r,a0),p1=P(r,a1);return'M'+p0[0]+' '+p0[1]+' A'+r+' '+r+' 0 0 1 '+p1[0]+' '+p1[1]}
-var o='<svg viewBox="0 0 340 175" width="100%" role="img" aria-label="Free time used"><defs><radialGradient id="dbSg"><stop offset="0" stop-color="#fff3a0"/><stop offset="1" stop-color="#ffb800"/></radialGradient><filter id="dbGl"><feGaussianBlur stdDeviation="6"/></filter></defs>';
-o+='<path d="'+arc(R,A0,A0-SP)+'" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="16" stroke-linecap="round"/>';
-var h0=0;rows.forEach(function(r){var a=ang(h0),b=ang(h0+r.a);if(a-b>0.03)o+='<path d="'+arc(R,a-0.012,b+0.012)+'" fill="none" stroke="'+r.c+'" stroke-opacity=".38" stroke-width="12" stroke-linecap="round"/>';if(r.u>0&&a-ang(h0+r.u)>0.03)o+='<path d="'+arc(R,a-0.012,ang(h0+r.u)+0.012)+'" fill="none" stroke="'+r.c+'" stroke-width="12" stroke-linecap="round"/>';h0+=r.a});
-var step=T>9?2:1;for(var i=0;i<=T;i+=step){var q=P(R-20,ang(i));o+='<text x="'+q[0]+'" y="'+(+q[1]+3)+'" text-anchor="middle" font-size="9" font-weight="700" fill="#8a5a1c">'+i+'h</text>'}
-var sa=ang(Math.min(sp,T)),sc=P(R,sa);if(sp>0)o=o.replace('<path d="'+arc(R,A0,A0-SP)+'" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="16" stroke-linecap="round"/>','<path d="'+arc(R,A0,A0-SP)+'" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="16" stroke-linecap="round"/><path d="'+arc(R,A0,sa)+'" fill="none" stroke="#ffc400" stroke-width="16" stroke-linecap="round"/>');o+='<circle cx="'+sc[0]+'" cy="'+sc[1]+'" r="16" fill="#ffd24a" opacity=".85" filter="url(#dbGl)"/><circle cx="'+sc[0]+'" cy="'+sc[1]+'" r="4" fill="#fff"/>';
-if(d.free>0){var left=Math.max(0,d.free*60-sp*60);o+='<text x="170" y="'+(cy-24)+'" text-anchor="middle" font-size="38" font-weight="900" font-style="italic" fill="#2b1500">'+dbkMin(left)+'</text><text x="170" y="'+(cy-7)+'" text-anchor="middle" font-size="10" font-weight="800" letter-spacing="2" fill="#8a5a1c">LEFT TODAY</text>'}else o+='<text x="170" y="'+(cy-14)+'" text-anchor="middle" font-size="16" font-weight="800" fill="#8a5a1c">Set your free hours</text>';
-return o+'</svg>'}
+function dbkSun(){var d=dbk(),n=new Date(),T=16,nowH=Math.max(0,Math.min(T,n.getHours()+n.getMinutes()/60-6));
+function pc(h){return(h/T*100).toFixed(2)+'%'}
+var sp=[],S=0;d.habs.forEach(function(h){var u=dbkUsed(d,h.id)/3600000;sp.push(u);S+=u});
+var mid=19,o='<div class="dbln"></div>';
+if(nowH>0.02)o+='<div class="dbel" style="width:'+pc(nowH)+'"></div>';
+var c=Math.max(0,nowH-S);d.habs.forEach(function(h,k){var u=Math.min(sp[k],Math.max(0,nowH-c));if(u>0.03)o+='<div class="dbsp" style="left:'+pc(c)+';width:'+pc(u)+';background:'+dbkCol(h.id)+'"></div>';c+=u});
+c=nowH;var over=false;d.habs.forEach(function(h,k){var rem=Math.max(0,(d.al[h.id]||0)/60-sp[k]);if(rem<=0)return;var e=c+rem;if(e>T)over=true;var b=Math.min(e,T);if(b>c){var ht=Math.min(34,5+rem*13);o+='<div class="dbfw" style="left:'+pc(c)+';width:'+pc(b-c)+';top:'+(mid-ht/2).toFixed(1)+'px;height:'+ht.toFixed(1)+'px;border-radius:'+(ht/2).toFixed(1)+'px;background:'+dbkCol(h.id)+'"></div>'}c=e});
+o+='<div class="dbdot" style="left:'+pc(nowH)+';top:'+mid+'px"></div>';
+var tk='';[0,4,8,12,16].forEach(function(i){var hr=6+i,lb=(hr%12||12)+(hr<12?'a':'p');tk+='<span style="left:'+pc(i)+';transform:translateX('+(i===0?'0':i===16?'-100%':'-50%')+')">'+lb+'</span>'});
+var big,sub;if(nowH>=T){big='Day complete';sub='SEE YOU AT 6 AM'}else{big=dbkMin(Math.round((T-nowH)*60));sub='LEFT · '+n.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+(over?' · PLAN RUNS PAST 10 PM':'')}
+return'<div class="dbdial"><div class="dbdl"><div class="dbdb">'+big+'</div><div class="dbds">'+sub+'</div></div><div class="dbdr2"><div class="dbdt">'+o+'</div><div class="dbdk">'+tk+'</div></div></div>'}
 function P2(c,r,a){return[(+c[0]+r*Math.cos(a)).toFixed(1),(+c[1]-r*Math.sin(a)).toFixed(1)]}
 var DBK_COL=['#ff9f1c','#e5484d','#7a5cff','#2bb673','#1c9bff','#d6457f','#8a6d3b','#20b2aa'];
 function dbkCol(id){var d=dbk(),i=d.habs.map(function(h){return h.id}).indexOf(id);return DBK_COL[(i<0?0:i)%DBK_COL.length]}
@@ -1567,7 +1584,7 @@ function dbkSum(){var d=dbk(),sp=0,parts=[];d.habs.forEach(function(h){var u=dbk
 function dbkHab(id){var d=dbk();return d.habs.filter(function(h){return h.id===id})[0]}
 function rDbk(){var el=$('dbk');if(!el)return;var d=dbk(),asg=0;d.habs.forEach(function(h){asg+=d.al[h.id]||0});
 var fm=d.free*60,left=fm-asg,pct=fm>0?Math.min(100,asg/fm*100):0,over=asg>fm;
-var h='<div class="dbh">DAYBREAK</div><div class="dbsub">Plan your free day. Resets every morning.</div>';
+var h='<div class="dbh">DAYBREAK</div>';
 if(d.ask){var a=d.ask;h+='<div class="dbask"><b>Save yesterday’s plan as a template?</b><div class="dbm">'+dbkMin(a.free*60)+' free · '+a.items.map(function(i){return esc(i.n)+' '+dbkMin(i.m||i.sp)}).join(' · ')+'</div><div class="dbbt"><button class="dbp" data-a="dbkask">Save template</button><button class="dbg" data-a="dbkskip">No thanks</button></div></div>'}
 h+='<div class="dbc"><div class="dbl">FREE HOURS TODAY</div><div class="dbfr"><button class="dbq" data-a="dbkfree" data-n="-0.5" aria-label="Less">−</button><button class="dbfv" data-a="dbkfreeset">'+(d.free?dbkMin(fm):'Set')+'</button><button class="dbq" data-a="dbkfree" data-n="0.5" aria-label="More">+</button></div>'+
 '<div class="dbbar'+(over?' ov':'')+'"><i style="width:'+pct+'%"></i></div><div class="dbm">'+(fm?(over?'Over by '+dbkMin(-left):dbkMin(asg)+' assigned · '+dbkMin(left)+' left'):'Enter how many free hours you have')+'</div></div>';
@@ -1576,14 +1593,14 @@ var s=d.sel&&dbkHab(d.sel);
 if(s){var t=d.t[s.id]||{},run=!!t.run,a2=d.al[s.id]||0,lf=dbkLeft(d,s.id),done=a2>0&&lf<=0;
 h+='<div class="dbt dbd"><div class="dbdl"><span class="dbdn">'+esc(s.n)+'</span><div id="dbkT" class="dbtc">'+dbkClock(lf)+'</div><small>'+(a2?'of '+dbkMin(a2):'no time yet')+'</small></div><div class="dbdr">'+(a2?'<button class="dbp" data-a="dbkgo" data-id="'+s.id+'"'+(done?' disabled':'')+'>'+(done?'Done':run?'\u275a\u275a Pause':(t.sp?'Resume':'Start'))+'</button><button class="dbg" data-a="dbkreset" data-id="'+s.id+'">Reset</button>':'<div class="dbm" style="margin:0 0 2px">Add time to start</div>')+'<div class="dbadj"><button class="dbq" data-a="dbkadj" data-id="'+s.id+'" data-n="-15">\u221215</button><span>total</span><button class="dbq" data-a="dbkadj" data-id="'+s.id+'" data-n="15">+15</button></div></div></div>'}
 h+='<div class="dbhd"><span class="dbl">HABITS</span><button class="dbsort'+(d.sort?' on':'')+'" data-a="dbksort">'+(d.sort==='desc'?'Longest \u2193':d.sort==='asc'?'Shortest \u2191':'Sort')+'</button></div>';
-dbkOrd(d).forEach(function(x){var a3=d.al[x.id]||0,u=dbkUsed(d,x.id),run2=d.t[x.id]&&d.t[x.id].run;h+='<div class="dbr'+(d.sel===x.id?' on':'')+(run2?' go':'')+'"><button class="dbn" data-a="dbksel" data-id="'+x.id+'">'+esc(x.n)+'<small>'+(u>=30000?dbkMin(u/60000)+' spent · ':'')+(a3?dbkMin(a3)+' planned':'tap to plan')+'</small></button><div class="dba"><button class="dbq" data-a="dbkadj" data-id="'+x.id+'" data-n="-15" aria-label="Less">−</button><span>'+dbkMin(a3)+'</span><button class="dbq" data-a="dbkadj" data-id="'+x.id+'" data-n="15" aria-label="More">+</button></div><button class="dbe" data-a="dbkedit" data-id="'+x.id+'" aria-label="Edit">✎</button></div>'});
+dbkOrd(d).forEach(function(x){var a3=d.al[x.id]||0,u=dbkUsed(d,x.id),run2=d.t[x.id]&&d.t[x.id].run;h+='<div class="dbr'+(d.sel===x.id?' on':'')+(run2?' go':'')+'" style="border-left-color:'+dbkCol(x.id)+'"><button class="dbn" data-a="dbksel" data-id="'+x.id+'">'+esc(x.n)+((u>=30000||a3)?'<small>'+(u>=30000?dbkMin(u/60000)+' spent':'')+(u>=30000&&a3?' \u00b7 ':'')+(a3?dbkMin(a3)+' planned':'')+'</small>':'')+'</button><div class="dba"><button class="dbq" data-a="dbkadj" data-id="'+x.id+'" data-n="-15" aria-label="Less">−</button><span>'+dbkMin(a3)+'</span><button class="dbq" data-a="dbkadj" data-id="'+x.id+'" data-n="15" aria-label="More">+</button></div><button class="dbe" data-a="dbkedit" data-id="'+x.id+'" aria-label="Edit">✎</button></div>'});
 h+='<button class="dbadd" data-a="dbknew">+ New habit</button>';
 h+='<div class="dbl" style="margin:18px 2px 6px">TEMPLATES</div>';
 h+=d.tpl.length?'<div class="dbtp">'+d.tpl.map(function(x){return'<span class="dbtc2"><button data-a="dbktpl" data-id="'+x.id+'">'+esc(x.n)+'<small>'+dbkMin(x.free*60)+'</small></button><button class="dbtx" data-a="dbktpd" data-id="'+x.id+'" aria-label="Delete template">×</button></span>'}).join('')+'</div>':'<div class="dbm" style="margin:2px 2px 8px">No templates yet.</div>';
 h+='<button class="dbadd" data-a="dbktsave"'+(asg?'':' disabled')+'>Save this day as a template</button>';
 h+='<div class="dbx">'+swHtml()+runHtml()+wkHtml()+'</div>';
 el.innerHTML=h}
-function dbkTick(){if(!S.dbk)return;var d0=S.dbk.day,d=dbk();if(d0!==d.day&&tab==='dbk'){rDbk();return}var run=null;d.habs.forEach(function(h){var t=d.t[h.id];if(t&&t.run)run=h.id});if(!run)return;
+function dbkTick(){if(!S.dbk)return;var d0=S.dbk.day,d=dbk();if(d0!==d.day&&tab==='dbk'){rDbk();return}if(tab==='dbk'&&Date.now()-(window.dbkLast||0)>20000){window.dbkLast=Date.now();var sn0=$('dbkSun');if(sn0)sn0.innerHTML=dbkSun()}var run=null;d.habs.forEach(function(h){var t=d.t[h.id];if(t&&t.run)run=h.id});if(!run)return;
 if(dbkLeft(d,run)<=0){var t=d.t[run];t.sp=(d.al[run]||0)*60000;t.run=0;save();chime(0);if(tab==='dbk')rDbk();return}
 if(tab==='dbk'){var e=$('dbkT');if(e&&d.sel===run)e.textContent=dbkClock(dbkLeft(d,run));var s=$('dbkS');if(s)s.innerHTML=dbkSum();var sn=$('dbkSun');if(sn)sn.innerHTML=dbkSun()}}
 function dbkSaveSheet(def,free,items,fromAsk){sheet('Save as template','<label for="dbkTn" style="margin-top:0">Template name</label><input id="dbkTn" maxlength="40" value="'+esc(def)+'"><div class="lab" style="margin-top:8px">'+dbkMin(free*60)+' free · '+items.map(function(i){return esc(i.n)+' '+dbkMin(i.m)}).join(' · ')+'</div>','Save',function(){var n=V('dbkTn');if(!n)return false;var d=dbk();d.tpl.push({id:'t'+Date.now().toString(36),n:n,free:free,items:items});if(fromAsk)d.ask=null;else d.saved=d.day;save()})}
