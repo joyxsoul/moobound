@@ -1157,7 +1157,7 @@ h+='<div class="slot'+(s.k==='dark'?' night':'')+(s.k===curSlot()?' now':'')+'">
 var gh=S.rec.filter(function(r){return r.slot===s.k&&r.on!==ymd(0)}).sort(function(a,b){return String(a.t).localeCompare(String(b.t),undefined,{sensitivity:'base'})});h+=gh.map(function(r){return'<button class="task ghost" data-a="recon" data-id="'+r.id+'"><span>'+esc(r.t)+'</span><em>'+r.stat.toUpperCase()+'</em></button>'}).join('');
 h+=ts.length?ts.map(function(t){return'<button class="task'+(t.done?' done':'')+'" data-a="task" data-id="'+t.id+'"><span>'+esc(t.t)+'</span><em>'+(t.done?'+1 ':'')+t.stat.toUpperCase()+'</em></button>'}).join(''):(gh.length?'':'<div class="none">Nothing planned</div>');
 h+='</div></div>'});
-var hTT=h;h=hM1;h+=runHtml();h+=wkHtml();h+=swHtml();h+=fusHtml();var hOF=ofHtml();
+var hTT=h;h=hM1;h+=fusHtml();var hOF=ofHtml();
 if(!TDHIDE)h+='<div class="btnrow"><button class="addop" data-a="glopen">Compendium</button></div>';
 var hM2=h;h='';h+=sqHtml();
 var hRest=h;h=hM1+vstHtml()+hTT+hRest+hM2.slice(hM1.length);
@@ -1553,9 +1553,7 @@ var o='<svg viewBox="0 0 340 175" width="100%" role="img" aria-label="Free time 
 o+='<path d="'+arc(R,A0,A0-SP)+'" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="16" stroke-linecap="round"/>';
 var h0=0;rows.forEach(function(r){var a=ang(h0),b=ang(h0+r.a);if(a-b>0.03)o+='<path d="'+arc(R,a-0.012,b+0.012)+'" fill="none" stroke="'+r.c+'" stroke-opacity=".38" stroke-width="12" stroke-linecap="round"/>';if(r.u>0&&a-ang(h0+r.u)>0.03)o+='<path d="'+arc(R,a-0.012,ang(h0+r.u)+0.012)+'" fill="none" stroke="'+r.c+'" stroke-width="12" stroke-linecap="round"/>';h0+=r.a});
 var step=T>9?2:1;for(var i=0;i<=T;i+=step){var q=P(R-20,ang(i));o+='<text x="'+q[0]+'" y="'+(+q[1]+3)+'" text-anchor="middle" font-size="9" font-weight="700" fill="#8a5a1c">'+i+'h</text>'}
-var sa=ang(Math.min(sp,T)),sc=P(R,sa);o+='<circle cx="'+sc[0]+'" cy="'+sc[1]+'" r="30" fill="#ffd24a" opacity=".7" filter="url(#dbGl)"/>';
-for(var k=0;k<12;k++){var an=k*Math.PI/6,r1=P2(sc,18,an),r2=P2(sc,k%2?23:27,an);o+='<line x1="'+r1[0]+'" y1="'+r1[1]+'" x2="'+r2[0]+'" y2="'+r2[1]+'" stroke="#ff9f1c" stroke-width="2.5" stroke-linecap="round"/>'}
-o+='<circle cx="'+sc[0]+'" cy="'+sc[1]+'" r="13" fill="url(#dbSg)" stroke="#2b1500" stroke-width="2.5"/>';
+var sa=ang(Math.min(sp,T)),sc=P(R,sa);if(sp>0)o=o.replace('<path d="'+arc(R,A0,A0-SP)+'" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="16" stroke-linecap="round"/>','<path d="'+arc(R,A0,A0-SP)+'" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="16" stroke-linecap="round"/><path d="'+arc(R,A0,sa)+'" fill="none" stroke="#ffc400" stroke-width="16" stroke-linecap="round"/>');o+='<circle cx="'+sc[0]+'" cy="'+sc[1]+'" r="16" fill="#ffd24a" opacity=".85" filter="url(#dbGl)"/><circle cx="'+sc[0]+'" cy="'+sc[1]+'" r="4" fill="#fff"/>';
 if(d.free>0){var left=Math.max(0,d.free*60-sp*60);o+='<text x="170" y="'+(cy-24)+'" text-anchor="middle" font-size="38" font-weight="900" font-style="italic" fill="#2b1500">'+dbkMin(left)+'</text><text x="170" y="'+(cy-7)+'" text-anchor="middle" font-size="10" font-weight="800" letter-spacing="2" fill="#8a5a1c">LEFT TODAY</text>'}else o+='<text x="170" y="'+(cy-14)+'" text-anchor="middle" font-size="16" font-weight="800" fill="#8a5a1c">Set your free hours</text>';
 return o+'</svg>'}
 function P2(c,r,a){return[(+c[0]+r*Math.cos(a)).toFixed(1),(+c[1]-r*Math.sin(a)).toFixed(1)]}
@@ -1583,6 +1581,7 @@ h+='<button class="dbadd" data-a="dbknew">+ New habit</button>';
 h+='<div class="dbl" style="margin:18px 2px 6px">TEMPLATES</div>';
 h+=d.tpl.length?'<div class="dbtp">'+d.tpl.map(function(x){return'<span class="dbtc2"><button data-a="dbktpl" data-id="'+x.id+'">'+esc(x.n)+'<small>'+dbkMin(x.free*60)+'</small></button><button class="dbtx" data-a="dbktpd" data-id="'+x.id+'" aria-label="Delete template">×</button></span>'}).join('')+'</div>':'<div class="dbm" style="margin:2px 2px 8px">No templates yet.</div>';
 h+='<button class="dbadd" data-a="dbktsave"'+(asg?'':' disabled')+'>Save this day as a template</button>';
+h+='<div class="dbx">'+swHtml()+runHtml()+wkHtml()+'</div>';
 el.innerHTML=h}
 function dbkTick(){if(!S.dbk)return;var d0=S.dbk.day,d=dbk();if(d0!==d.day&&tab==='dbk'){rDbk();return}var run=null;d.habs.forEach(function(h){var t=d.t[h.id];if(t&&t.run)run=h.id});if(!run)return;
 if(dbkLeft(d,run)<=0){var t=d.t[run];t.sp=(d.al[run]||0)*60000;t.run=0;save();chime(0);if(tab==='dbk')rDbk();return}
@@ -2931,7 +2930,7 @@ set('seekto',null);set('previoustrack',null);set('nexttrack',null)})();
 var _rMed=rMed;rMed=function(){_rMed.apply(this,arguments);mvFitAll()};
 setInterval(medTick,500);medTick();setInterval(dbkTick,500);setInterval(runTick,250);
 var lastSlot=curSlot();setInterval(function(){if(rollPlan())render();if(lastSlot!==curSlot()){lastSlot=curSlot();rToday()}},30000);
-setInterval(function(){if(tab==='today'&&S.sw&&S.sw.since)swUpd();if(tab!=='shadows')return;var tot=today().reduce(function(s,x){return counts(x.name)?s+x.ms:s},0);S.acts.forEach(function(a){if(counts(a.name))tot+=el(a);var n=document.querySelector('.tm[data-id="'+a.id+'"]');if(n)n.textContent=fmt(el(a))});var t=$('tot');if(t)t.textContent=fmtHM(tot)},1000);
+setInterval(function(){if((tab==='today'||tab==='dbk')&&S.sw&&S.sw.since)swUpd();if(tab!=='shadows')return;var tot=today().reduce(function(s,x){return counts(x.name)?s+x.ms:s},0);S.acts.forEach(function(a){if(counts(a.name))tot+=el(a);var n=document.querySelector('.tm[data-id="'+a.id+'"]');if(n)n.textContent=fmt(el(a))});var t=$('tot');if(t)t.textContent=fmtHM(tot)},1000);
 render();
 plImport();
 </script>
