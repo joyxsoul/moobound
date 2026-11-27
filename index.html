@@ -847,6 +847,43 @@ nav button{font-size:11px;padding-left:2px;padding-right:2px;white-space:nowrap}
 .moodp .mpair.mpv .mmid{border:2px solid var(--k)!important;box-shadow:3px 3px 0 var(--k)!important}
 .mchips.mtd{margin-top:8px}
 .mpair.mpv+.mtwo{margin-top:10px}
+nav button{font-size:10px}
+#dbk{background:linear-gradient(180deg,#ffcf9a 0,#ffe3bd 38%,#fff5e2 100%);margin:-8px;padding:14px 12px 28px;color:#4a2a00}
+#dbk .dbh{display:inline-block;background:#ff9f1c;color:#2b1500;font:900 26px var(--disp,system-ui);letter-spacing:3px;padding:4px 20px 4px 14px;transform:skewX(-12deg);box-shadow:5px 5px 0 #2b1500;margin:6px 0 8px}
+#dbk .dbsub{font-size:12px;color:#8a5a1c;margin:0 2px 12px}
+#dbk .dbl{font:800 10px system-ui;letter-spacing:2px;color:#8a5a1c}
+#dbk .dbm{font-size:12px;color:#8a5a1c;margin-top:6px}
+#dbk .dbc,#dbk .dbt,#dbk .dbask{background:#fff;border:2px solid #2b1500;border-radius:14px;box-shadow:4px 4px 0 #2b1500;padding:12px;margin:0 0 12px;text-align:center}
+#dbk .dbask{background:#fff1b8;text-align:left}
+#dbk .dbfr{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:6px}
+#dbk .dbq{background:#ffe3bd;color:#2b1500;border:2px solid #2b1500;border-radius:10px;min-width:40px;min-height:36px;font:800 16px system-ui;padding:0 10px}
+#dbk .dbfv{background:none;border:0;color:#2b1500;font:italic 900 40px var(--disp,system-ui);min-width:110px}
+#dbk .dbbar{height:10px;border:2px solid #2b1500;border-radius:8px;background:#ffe9c8;overflow:hidden;margin-top:6px}
+#dbk .dbbar i{display:block;height:100%;background:#ff9f1c}
+#dbk .dbbar.ov i{background:#e5484d}
+#dbk .dbs{font-size:13px;line-height:1.5;background:#fff8ea;border:1.5px dashed #c98a3c;border-radius:10px;padding:8px 10px;margin:0 0 12px;color:#4a2a00}
+#dbk .dbtc{font:italic 900 54px/1.1 var(--disp,system-ui);margin:4px 0 8px;color:#2b1500}
+#dbk .dbbt{display:flex;gap:8px;justify-content:center;margin:2px 0}
+#dbk .dbp{background:#ff9f1c;color:#2b1500;border:2px solid #2b1500;border-radius:10px;box-shadow:3px 3px 0 #2b1500;font:800 14px system-ui;padding:8px 18px}
+#dbk .dbp:disabled{opacity:.5}
+#dbk .dbg{background:#fff;color:#2b1500;border:2px solid #2b1500;border-radius:10px;font:800 14px system-ui;padding:8px 16px}
+#dbk .dbadj{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px;font-size:13px;font-weight:700}
+#dbk .dbr{display:flex;align-items:center;gap:8px;background:#fff;border:2px solid #e9c48a;border-left:6px solid #ff9f1c;border-radius:4px 14px 4px 14px;padding:6px 8px;margin:6px 0}
+#dbk .dbr.on{border-color:#2b1500;box-shadow:3px 3px 0 #2b1500}
+#dbk .dbr.go{background:#fff1b8}
+#dbk .dbn{flex:1;min-width:0;background:none;border:0;text-align:left;color:#2b1500;font:800 14px system-ui;padding:2px}
+#dbk .dbn small{display:block;font:500 11px system-ui;color:#8a5a1c;margin-top:1px}
+#dbk .dba{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700}
+#dbk .dba span{min-width:44px;text-align:center}
+#dbk .dba .dbq{min-width:32px;min-height:32px}
+#dbk .dbe{background:none;border:0;color:#8a5a1c;font-size:16px;min-width:30px;min-height:32px}
+#dbk .dbadd{display:block;width:100%;background:none;border:2px dashed #c98a3c;border-radius:12px;color:#7a4a00;font:800 13px system-ui;padding:10px;margin:8px 0}
+#dbk .dbadd:disabled{opacity:.45}
+#dbk .dbtp{display:flex;flex-wrap:wrap;gap:6px}
+#dbk .dbtc2{display:inline-flex;border:2px solid #2b1500;border-radius:10px;overflow:hidden;background:#fff}
+#dbk .dbtc2 button{background:none;border:0;color:#2b1500;font:800 12px system-ui;padding:6px 8px}
+#dbk .dbtc2 small{margin-left:6px;font-weight:500;color:#8a5a1c}
+#dbk .dbtc2 .dbtx{border-left:1px solid #e9c48a;color:#8a5a1c}
 </style>
 </head>
 <body>
@@ -857,8 +894,9 @@ nav button{font-size:11px;padding-left:2px;padding-right:2px;white-space:nowrap}
 <section class="screen" id="journal"></section>
 
 <section class="screen" id="med"></section><section class="screen" id="mood"></section><section class="screen" id="pantry"></section><section class="screen" id="tartarus"></section><section class="screen" id="wtd"></section>
+<section class="screen" id="dbk"></section>
 <section class="screen" id="shadows"></section>
-<nav id="nav"><button class="on" data-a="tab" data-s="today">Today</button><button data-a="tab" data-s="tartarus">Tartarus</button><button data-a="tab" data-s="med">Invigorate</button><button data-a="tab" data-s="mood">Mood</button><button data-a="tab" data-s="shadows">Shadows</button><button data-a="tab" data-s="wtd">Night Out</button></nav>
+<nav id="nav"><button class="on" data-a="tab" data-s="today">Today</button><button data-a="tab" data-s="tartarus">Tartarus</button><button data-a="tab" data-s="med">Invigorate</button><button data-a="tab" data-s="mood">Mood</button><button data-a="tab" data-s="shadows">Shadows</button><button data-a="tab" data-s="wtd">Night Out</button><button data-a="tab" data-s="dbk">Daybreak</button></nav>
 <div id="sheet"></div>
 </div>
 <script>
@@ -1471,7 +1509,60 @@ if(a==='ntocal'){ntoCal(D.k);return}
 if(a==='ntoaddv'){ntoAddSheet();return}
 if(a==='ntodel'){N.cust=N.cust.filter(function(x){return x.id!==D.id});delete N.hi['vol:'+D.id];delete N.hid['vol:'+D.id];save();closeSheet();rWtd();return}}
 
-function render(){rollPlan();rToday();rBonds();rDark();rShelf();rJournal();rDiet();rMed();rMood();rPantry();rTartarus();rShadows();rWtd();pnApply();mvFitAll();if(detail)rDetail();if(plOpen)rPlanner();if(cpOpen)rComp();if(glOpen)rGlance();save()}
+/* ===== Daybreak ===== */
+var DBK_DEF=['Read','Gym','Video Games','Treadmill','Errands','Rest'];
+function dbkNow(){return Date.now()}
+function dbkUsed(d,id){var t=d.t[id]||{};return(t.sp||0)+(t.run?dbkNow()-t.run:0)}
+function dbk(){var d=S.dbk;if(!d){d=S.dbk={free:0,habs:DBK_DEF.map(function(n,i){return{id:'h'+i,n:n}}),al:{},t:{},tpl:[],sel:'',day:ymd(0),ask:null,saved:''}}
+d.al=d.al||{};d.t=d.t||{};d.tpl=d.tpl||[];d.habs=d.habs||[];
+if(d.day!==ymd(0)){var items=[];d.habs.forEach(function(h){var a=d.al[h.id]||0,u=dbkUsed(d,h.id);if(a>0||u>=60000)items.push({n:h.n,m:a,sp:Math.round(u/60000)})});
+if(items.length&&d.saved!==d.day)d.ask={day:d.day,free:d.free,items:items};
+d.day=ymd(0);d.al={};d.t={};d.free=0;d.sel='';save()}
+return d}
+function dbkMin(m){m=Math.round(m);var h=Math.floor(m/60),r=m%60;return h?(r?h+'h '+r+'m':h+'h'):(r+'m')}
+function dbkClock(ms){var s=Math.ceil(ms/1000),h=Math.floor(s/3600),m=Math.floor(s%3600/60);return h?h+':'+pad(m)+':'+pad(s%60):m+':'+pad(s%60)}
+function dbkLeft(d,id){return Math.max(0,(d.al[id]||0)*60000-dbkUsed(d,id))}
+function dbkSum(){var d=dbk(),sp=0,parts=[];d.habs.forEach(function(h){var u=dbkUsed(d,h.id);sp+=u;if(u>=30000)parts.push(dbkMin(u/60000)+' on '+esc(h.n))});return'<b>Hours spent</b> '+dbkMin(sp/60000)+' of '+dbkMin(d.free*60)+(parts.length?' · '+parts.join(' · '):'')}
+function dbkHab(id){var d=dbk();return d.habs.filter(function(h){return h.id===id})[0]}
+function rDbk(){var el=$('dbk');if(!el)return;var d=dbk(),asg=0;d.habs.forEach(function(h){asg+=d.al[h.id]||0});
+var fm=d.free*60,left=fm-asg,pct=fm>0?Math.min(100,asg/fm*100):0,over=asg>fm;
+var h='<div class="dbh">DAYBREAK</div><div class="dbsub">Plan your free day. Resets every morning.</div>';
+if(d.ask){var a=d.ask;h+='<div class="dbask"><b>Save yesterday’s plan as a template?</b><div class="dbm">'+dbkMin(a.free*60)+' free · '+a.items.map(function(i){return esc(i.n)+' '+dbkMin(i.m||i.sp)}).join(' · ')+'</div><div class="dbbt"><button class="dbp" data-a="dbkask">Save template</button><button class="dbg" data-a="dbkskip">No thanks</button></div></div>'}
+h+='<div class="dbc"><div class="dbl">FREE HOURS TODAY</div><div class="dbfr"><button class="dbq" data-a="dbkfree" data-n="-0.5" aria-label="Less">−</button><button class="dbfv" data-a="dbkfreeset">'+(d.free?dbkMin(fm):'Set')+'</button><button class="dbq" data-a="dbkfree" data-n="0.5" aria-label="More">+</button></div>'+
+'<div class="dbbar'+(over?' ov':'')+'"><i style="width:'+pct+'%"></i></div><div class="dbm">'+(fm?(over?'Over by '+dbkMin(-left):dbkMin(asg)+' assigned · '+dbkMin(left)+' left'):'Enter how many free hours you have')+'</div></div>';
+h+='<div class="dbs" id="dbkS">'+dbkSum()+'</div>';
+var s=d.sel&&dbkHab(d.sel);
+if(s){var t=d.t[s.id]||{},run=!!t.run,a2=d.al[s.id]||0,lf=dbkLeft(d,s.id),done=a2>0&&lf<=0;
+h+='<div class="dbt"><div class="dbl">'+esc(s.n).toUpperCase()+'</div><div id="dbkT" class="dbtc">'+dbkClock(lf)+'</div><div class="dbbt">'+(a2?'<button class="dbp" data-a="dbkgo" data-id="'+s.id+'"'+(done?' disabled':'')+'>'+(done?'Done ✓':run?'Pause':(t.sp?'Resume':'Start'))+'</button><button class="dbg" data-a="dbkreset" data-id="'+s.id+'">Reset</button>':'<div class="dbm">Add time with + below to start</div>')+'</div><div class="dbadj"><button class="dbq" data-a="dbkadj" data-id="'+s.id+'" data-n="-15">−15m</button><span>Total '+dbkMin(a2)+'</span><button class="dbq" data-a="dbkadj" data-id="'+s.id+'" data-n="15">+15m</button></div></div>'}
+h+='<div class="dbl" style="margin:16px 2px 6px">HABITS</div>';
+d.habs.forEach(function(x){var a3=d.al[x.id]||0,u=dbkUsed(d,x.id),run2=d.t[x.id]&&d.t[x.id].run;h+='<div class="dbr'+(d.sel===x.id?' on':'')+(run2?' go':'')+'"><button class="dbn" data-a="dbksel" data-id="'+x.id+'">'+esc(x.n)+'<small>'+(u>=30000?dbkMin(u/60000)+' spent · ':'')+(a3?dbkMin(a3)+' planned':'tap to plan')+'</small></button><div class="dba"><button class="dbq" data-a="dbkadj" data-id="'+x.id+'" data-n="-15" aria-label="Less">−</button><span>'+dbkMin(a3)+'</span><button class="dbq" data-a="dbkadj" data-id="'+x.id+'" data-n="15" aria-label="More">+</button></div><button class="dbe" data-a="dbkedit" data-id="'+x.id+'" aria-label="Edit">✎</button></div>'});
+h+='<button class="dbadd" data-a="dbknew">+ New habit</button>';
+h+='<div class="dbl" style="margin:18px 2px 6px">TEMPLATES</div>';
+h+=d.tpl.length?'<div class="dbtp">'+d.tpl.map(function(x){return'<span class="dbtc2"><button data-a="dbktpl" data-id="'+x.id+'">'+esc(x.n)+'<small>'+dbkMin(x.free*60)+'</small></button><button class="dbtx" data-a="dbktpd" data-id="'+x.id+'" aria-label="Delete template">×</button></span>'}).join('')+'</div>':'<div class="dbm" style="margin:2px 2px 8px">No templates yet.</div>';
+h+='<button class="dbadd" data-a="dbktsave"'+(asg?'':' disabled')+'>Save this day as a template</button>';
+el.innerHTML=h}
+function dbkTick(){if(!S.dbk)return;var d0=S.dbk.day,d=dbk();if(d0!==d.day&&tab==='dbk'){rDbk();return}var run=null;d.habs.forEach(function(h){var t=d.t[h.id];if(t&&t.run)run=h.id});if(!run)return;
+if(dbkLeft(d,run)<=0){var t=d.t[run];t.sp=(d.al[run]||0)*60000;t.run=0;save();chime(0);if(tab==='dbk')rDbk();return}
+if(tab==='dbk'){var e=$('dbkT');if(e&&d.sel===run)e.textContent=dbkClock(dbkLeft(d,run));var s=$('dbkS');if(s)s.innerHTML=dbkSum()}}
+function dbkSaveSheet(def,free,items,fromAsk){sheet('Save as template','<label for="dbkTn" style="margin-top:0">Template name</label><input id="dbkTn" maxlength="40" value="'+esc(def)+'"><div class="lab" style="margin-top:8px">'+dbkMin(free*60)+' free · '+items.map(function(i){return esc(i.n)+' '+dbkMin(i.m)}).join(' · ')+'</div>','Save',function(){var n=V('dbkTn');if(!n)return false;var d=dbk();d.tpl.push({id:'t'+Date.now().toString(36),n:n,free:free,items:items});if(fromAsk)d.ask=null;else d.saved=d.day;save()})}
+function dbkLoad(id){var d=dbk(),x=d.tpl.filter(function(t){return t.id===id})[0];if(!x)return;d.free=x.free;d.al={};d.t={};d.sel='';x.items.forEach(function(i){var h=d.habs.filter(function(q){return q.n===i.n})[0];if(!h){h={id:'h'+Date.now().toString(36)+Math.random().toString(36).slice(2,4),n:i.n};d.habs.push(h)}d.al[h.id]=i.m});save();rDbk()}
+function dbkAct(a,t){var d=dbk(),D=t.dataset,id=D.id;
+if(a==='dbkfree'){d.free=Math.max(0,Math.min(24,Math.round((d.free+parseFloat(D.n))*2)/2));save();rDbk();return}
+if(a==='dbkfreeset'){sheet('Free hours today','<label for="dbkF" style="margin-top:0">Hours (e.g. 6 or 7.5)</label><input id="dbkF" type="number" step="0.25" min="0" max="24" inputmode="decimal" value="'+(d.free||'')+'">','Set',function(){var v=parseFloat(V('dbkF'));if(isNaN(v)||v<0)return false;d.free=Math.min(24,Math.round(v*4)/4);save()});return}
+if(a==='dbksel'){d.sel=d.sel===id?'':id;rDbk();return}
+if(a==='dbkadj'){var n=parseInt(D.n,10),ol=d.al[id]||0,nw=Math.max(0,ol+n);d.al[id]=nw;if(!d.sel)d.sel=id;save();rDbk();return}
+if(a==='dbkgo'){var tt=d.t[id]||(d.t[id]={sp:0,run:0});if(tt.run){tt.sp+=dbkNow()-tt.run;tt.run=0}else{if(dbkLeft(d,id)<=0)return;d.habs.forEach(function(h){var o=d.t[h.id];if(o&&o.run){o.sp+=dbkNow()-o.run;o.run=0}});tt.run=dbkNow()}save();rDbk();return}
+if(a==='dbkreset'){d.t[id]={sp:0,run:0};save();rDbk();return}
+if(a==='dbknew'){sheet('New habit','<label for="dbkN" style="margin-top:0">Name</label><input id="dbkN" maxlength="30" placeholder="e.g. Painting">','Add',function(){var n=V('dbkN');if(!n)return false;var h={id:'h'+Date.now().toString(36),n:n};d.habs.push(h);d.sel=h.id;save()});return}
+if(a==='dbkedit'){var hb=dbkHab(id);if(!hb)return;sheet('Edit habit','<label for="dbkN" style="margin-top:0">Name</label><input id="dbkN" maxlength="30" value="'+esc(hb.n)+'"><button class="btn" data-a="dbkdel" data-id="'+id+'" style="margin-top:14px;width:100%">Delete habit</button>','Save',function(){var n=V('dbkN');if(!n)return false;hb.n=n;save()});return}
+if(a==='dbkdel'){d.habs=d.habs.filter(function(h){return h.id!==id});delete d.al[id];delete d.t[id];if(d.sel===id)d.sel='';save();closeSheet();rDbk();return}
+if(a==='dbktsave'){var items=[];d.habs.forEach(function(h){if(d.al[h.id])items.push({n:h.n,m:d.al[h.id]})});if(!items.length)return;dbkSaveSheet('My day',d.free,items,false);return}
+if(a==='dbkask'){var k=d.ask;if(!k)return;dbkSaveSheet('Day plan '+k.day.slice(5),k.free,k.items.map(function(i){return{n:i.n,m:i.m||i.sp}}),true);return}
+if(a==='dbkskip'){d.ask=null;save();rDbk();return}
+if(a==='dbktpl'){var sp=0;d.habs.forEach(function(h){sp+=dbkUsed(d,h.id)});if(sp>=60000){sheet('Load template?','<div class="lab">This replaces today’s plan and resets your timers.</div>','Load',function(){dbkLoad(id)})}else dbkLoad(id);return}
+if(a==='dbktpd'){d.tpl=d.tpl.filter(function(x){return x.id!==id});save();rDbk();return}}
+
+function render(){rollPlan();rToday();rBonds();rDark();rShelf();rJournal();rDiet();rMed();rMood();rPantry();rTartarus();rShadows();rWtd();rDbk();pnApply();mvFitAll();if(detail)rDetail();if(plOpen)rPlanner();if(cpOpen)rComp();if(glOpen)rGlance();save()}
 
 function sheet(title,body,ok,onOk){var s=$('sheet');s.innerHTML='<div class="panel"><h4>'+title+'</h4>'+body+(ok?'<div class="btns"><button class="btn" data-a="cancel">Cancel</button><button class="btn p" data-a="ok">'+ok+'</button></div>':'<div class="btns"><button class="btn" data-a="cancel">Close</button></div>')+'</div>';s.classList.add('on');s.classList.toggle('kb',[].some.call(s.querySelectorAll('input:not([type=file]):not([type=checkbox]):not([type=radio]):not([type=date]):not([type=time]),textarea'),function(x){return x.offsetParent!==null}));s._ok=onOk;var f=s.querySelector('input,select,textarea');}
 document.addEventListener('focusin',function(e){var t=e.target;if(t&&t.closest&&t.closest('#sheet')&&/INPUT|TEXTAREA|SELECT/.test(t.tagName))setTimeout(function(){try{t.scrollIntoView({block:'center',behavior:'smooth'})}catch(x){}},300)});
@@ -2653,7 +2744,7 @@ if(a==='pnsecdel'){var sc1=pnSec(id);if(!sc1)return;sheet('Delete section?','<p 
 if(a==='pnadd'){pnItemSheet(id,null);return}
 if(a==='pnedit'){var sc2=pnSec(t.dataset.s);if(sc2){var it2=sc2.items.filter(function(x){return x.id===id})[0];if(it2)pnItemSheet(sc2.id,it2)}return}
 if(a==='pnitdel'){var sc3=pnSec(t.dataset.s);if(sc3)sc3.items=sc3.items.filter(function(x){return x.id!==id});closeSheet();render();return}
-if(a==='tab'){tab=t.dataset.s;['today','bonds','dark','journal','med','mood','pantry','tartarus','shadows','wtd'].forEach(function(x){$(x).classList.toggle('on',x===tab)});document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('on',b===t)});$('phone').classList.toggle('dark-hour',tab==='dark');$('phone').classList.toggle('med',tab==='med');$('phone').classList.toggle('pantry',tab==='pantry');pnApply();mvFitAll();return}
+if(a==='tab'){tab=t.dataset.s;['today','bonds','dark','journal','med','mood','pantry','tartarus','shadows','wtd','dbk'].forEach(function(x){$(x).classList.toggle('on',x===tab)});document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('on',b===t)});$('phone').classList.toggle('dark-hour',tab==='dark');$('phone').classList.toggle('med',tab==='med');$('phone').classList.toggle('pantry',tab==='pantry');pnApply();mvFitAll();return}
 if(a==='fab'){composeAct();return}
 if(a==='tcomp'){composeTask(false);return}if(a==='tquick'){composeTask(true);return}
 if(a==='cpopen'){cpOpen=true;cpMode='list';cpItem=null;rComp();return}
@@ -2698,7 +2789,7 @@ if(a==='bcomp'){composeBond();return}
 if(a==='opadd'){opSheet(null);return}
 if(a==='opck'||a==='opcx'||a==='opca'){var po=by(S.ops,id);if(po){opKeep(po);po.ck=po.ck||[];if(a==='opck'){var ci=po.ck.filter(function(c){return c.id==t.dataset.k})[0];if(ci)ci.d=!ci.d}else if(a==='opcx')po.ck=po.ck.filter(function(c){return c.id!=t.dataset.k});else{var nt=$('opn').value.trim();if(nt){var mx=po.ck.reduce(function(m,c){return Math.max(m,c.id)},0);po.ck.push({id:mx+1,t:nt,d:false})}}save();opSheet(po);render();}return}
 if(a==='op'){opSheet(by(S.ops,id));return}
-if(a.indexOf('nto')===0){ntoAct(a,t);return}if(a==='cancel'){closeSheet();render();return}
+if(a.indexOf('nto')===0){ntoAct(a,t);return}if(a.indexOf('dbk')===0){dbkAct(a,t);return}if(a==='cancel'){closeSheet();render();return}
 if(a==='ok'){if(s._ok()===false)return;closeSheet();render();return}
 if(a==='task'){tkRes=false;taskSheet(by(S.tasks,id));return}
 if(a==='tchg'){tkRes='keep';taskSheet(by(S.tasks,id));return}if(a==='tmovek'){var kk=by(S.tasks,id);if(kk)kk.slot=t.dataset.s;tkRes=false}if(a==='tres'){tkRes=true;taskSheet(by(S.tasks,id));return}
@@ -2794,7 +2885,7 @@ set('play',function(){var a=lkCur();if(a&&!a.since){a.since=Date.now();lkPlay();
 set('stop',function(){var z=lkCur();if(z){var ms2=el(z);if(ms2>=1000)S.hist.unshift({name:z.name,at:Date.now(),ms:ms2});z.acc=0;z.since=null;save();render()}});
 set('seekto',null);set('previoustrack',null);set('nexttrack',null)})();
 var _rMed=rMed;rMed=function(){_rMed.apply(this,arguments);mvFitAll()};
-setInterval(medTick,500);medTick();setInterval(runTick,250);
+setInterval(medTick,500);medTick();setInterval(dbkTick,500);setInterval(runTick,250);
 var lastSlot=curSlot();setInterval(function(){if(rollPlan())render();if(lastSlot!==curSlot()){lastSlot=curSlot();rToday()}},30000);
 setInterval(function(){if(tab==='today'&&S.sw&&S.sw.since)swUpd();if(tab!=='shadows')return;var tot=today().reduce(function(s,x){return counts(x.name)?s+x.ms:s},0);S.acts.forEach(function(a){if(counts(a.name))tot+=el(a);var n=document.querySelector('.tm[data-id="'+a.id+'"]');if(n)n.textContent=fmt(el(a))});var t=$('tot');if(t)t.textContent=fmtHM(tot)},1000);
 render();
